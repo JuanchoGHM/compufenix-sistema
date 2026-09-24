@@ -63,12 +63,12 @@ public partial class MainWindow : Window
             bool esActivo = boton == activo;
 
             boton.Background = esActivo
-                ? new SolidColorBrush(Color.FromArgb(0x33, 255, 255, 255))
+                ? new SolidColorBrush(Color.FromRgb(0xEA, 0x58, 0x0C))
                 : Brushes.Transparent;
 
             boton.Foreground = esActivo
                 ? Brushes.White
-                : new SolidColorBrush(Color.FromRgb(0xC7, 0xD2, 0xFE));
+                : new SolidColorBrush(Color.FromRgb(0xBF, 0xDB, 0xFE));
         }
     }
 
