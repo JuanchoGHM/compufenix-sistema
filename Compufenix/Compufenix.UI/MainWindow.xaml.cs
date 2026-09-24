@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using Compufenix.Business;
 using Compufenix.Models;
 
@@ -32,7 +34,56 @@ public partial class MainWindow : Window
         CargarResumen();
     }
 
-    // Llena las 4 tarjetas con datos reales
+    // ===== Navegación entre pantallas =====
+
+    private void MostrarInicio()
+    {
+        VistaModulo.Content = null;
+        VistaModulo.Visibility = Visibility.Collapsed;
+        VistaInicio.Visibility = Visibility.Visible;
+        MarcarActivo(BtnInicio);
+        CargarResumen(); // refresca los números
+    }
+
+    private void MostrarModulo(UserControl vista, Button boton)
+    {
+        VistaInicio.Visibility = Visibility.Collapsed;
+        VistaModulo.Content = vista;
+        VistaModulo.Visibility = Visibility.Visible;
+        MarcarActivo(boton);
+    }
+
+    // Resalta el botón de la sección en la que estás
+    private void MarcarActivo(Button activo)
+    {
+        var botones = new[] { BtnInicio, BtnInventario, BtnTickets, BtnClientes, BtnReportes, BtnUsuarios };
+
+        foreach (var boton in botones)
+        {
+            bool esActivo = boton == activo;
+
+            boton.Background = esActivo
+                ? new SolidColorBrush(Color.FromArgb(0x33, 255, 255, 255))
+                : Brushes.Transparent;
+
+            boton.Foreground = esActivo
+                ? Brushes.White
+                : new SolidColorBrush(Color.FromRgb(0xC7, 0xD2, 0xFE));
+        }
+    }
+
+    private void Inicio_Click(object sender, RoutedEventArgs e)
+    {
+        MostrarInicio();
+    }
+
+    private void Inventario_Click(object sender, RoutedEventArgs e)
+    {
+        MostrarModulo(new InventarioView(), BtnInventario);
+    }
+
+    // ===== Resumen del Inicio =====
+
     private void CargarResumen()
     {
         try
@@ -50,6 +101,8 @@ public partial class MainWindow : Window
             // Si falla, las tarjetas se quedan con "—"
         }
     }
+
+    // ===== Cerrar sesión =====
 
     private void CerrarSesion_Click(object sender, RoutedEventArgs e)
     {
