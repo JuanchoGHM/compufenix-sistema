@@ -427,3 +427,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Configuración local con contraseñas (no subir a GitHub)
+appsettings.local.json
