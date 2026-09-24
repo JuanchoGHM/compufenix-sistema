@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using Compufenix.Data;
-using Microsoft.Extensions.Configuration;
+using Compufenix.Models;
 
 namespace Compufenix.UI;
 
@@ -9,30 +8,45 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        var usuario = Sesion.UsuarioActual;
+        if (usuario != null)
+        {
+            TxtBienvenida.Text = $"Hola, {usuario.Nombre}";
+            TxtNombreUsuario.Text = usuario.Nombre;
+            TxtRolUsuario.Text = usuario.Rol == RolUsuario.Administrador
+                ? "Administrador"
+                : "Técnico";
+        }
+
+        // Estas opciones son solo para el administrador
+        var visibilidadAdmin = Sesion.EsAdministrador
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
+        BtnClientes.Visibility = visibilidadAdmin;
+        BtnReportes.Visibility = visibilidadAdmin;
+        BtnUsuarios.Visibility = visibilidadAdmin;
     }
 
-    private void ProbarConexion_Click(object sender, RoutedEventArgs e)
+    private void CerrarSesion_Click(object sender, RoutedEventArgs e)
     {
-        try
+        Sesion.UsuarioActual = null;
+        Hide();
+
+        var login = new LoginWindow();
+        if (login.ShowDialog() == true)
         {
-            // 1. Lee el archivo con la cadena de conexión
-            var config = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.local.json", optional: false)
-                .Build();
-
-            var cadena = config.GetConnectionString("Compufenix")!;
-
-            // 2. Crea el "encargado" y le pide contar los productos
-            using var db = FabricaDbContext.Crear(cadena);
-            int total = db.Productos.Count();
-
-            // 3. Muestra el resultado
-            MessageBox.Show($"¡Conexión exitosa! Productos en la base de datos: {total}");
+            // Abre una ventana principal nueva con el usuario que entró
+            var nueva = new MainWindow();
+            Application.Current.MainWindow = nueva;
+            nueva.Show();
         }
-        catch (Exception ex)
+        else
         {
-            MessageBox.Show("No se pudo conectar:\n" + ex.Message);
+            Application.Current.Shutdown();
         }
+
+        Close();
     }
 }
