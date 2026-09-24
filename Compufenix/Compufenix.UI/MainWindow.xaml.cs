@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Compufenix.Business;
 using Compufenix.Models;
 
 namespace Compufenix.UI;
@@ -27,6 +28,27 @@ public partial class MainWindow : Window
         BtnClientes.Visibility = visibilidadAdmin;
         BtnReportes.Visibility = visibilidadAdmin;
         BtnUsuarios.Visibility = visibilidadAdmin;
+
+        CargarResumen();
+    }
+
+    // Llena las 4 tarjetas con datos reales
+    private void CargarResumen()
+    {
+        try
+        {
+            using var db = Configuracion.CrearDb();
+            var resumen = new ServicioResumen(db).Obtener();
+
+            TxtProductos.Text = resumen.Productos.ToString();
+            TxtStockBajo.Text = resumen.StockBajo.ToString();
+            TxtTicketsAbiertos.Text = resumen.TicketsAbiertos.ToString();
+            TxtClientes.Text = resumen.Clientes.ToString();
+        }
+        catch
+        {
+            // Si falla, las tarjetas se quedan con "—"
+        }
     }
 
     private void CerrarSesion_Click(object sender, RoutedEventArgs e)
