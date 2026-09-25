@@ -46,14 +46,21 @@
                       GridLinesVisibility="Horizontal"
                       RowHeight="56"
                       Background="Transparent"
-                      BorderThickness="0">
+                      BorderThickness="0"
+                      MouseDoubleClick="TablaTickets_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="CLIENTE" Binding="{Binding Equipo.Cliente.Nombre}"
                                          Width="1.6*" FontWeight="SemiBold"/>
                     <DataGridTextColumn Header="EQUIPO" Binding="{Binding Equipo.Tipo}" Width="*"/>
                     <DataGridTextColumn Header="TÉCNICO" Binding="{Binding Tecnico.Nombre}" Width="*"
                                          Foreground="{StaticResource TextoSuaveBrush}"/>
-                    <DataGridTextColumn Header="ESTADO" Binding="{Binding Estado}" Width="*"/>
+                    <DataGridTemplateColumn Header="ESTADO" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Estado, Converter={StaticResource ConvertidorEstado}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="INGRESO"
                                          Binding="{Binding FechaIngreso, StringFormat=dd/MM/yyyy}"
                                          Width="*" Foreground="{StaticResource TextoSuaveBrush}"/>

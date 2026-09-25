@@ -9,6 +9,18 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+
+        // Fuerza el formato de moneda y números de Costa Rica en toda la app
+        var cultura = new System.Globalization.CultureInfo("es-CR");
+        System.Threading.Thread.CurrentThread.CurrentCulture = cultura;
+        System.Threading.Thread.CurrentThread.CurrentUICulture = cultura;
+        System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultura;
+        System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultura;
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+            typeof(FrameworkElement),
+            new FrameworkPropertyMetadata(
+                System.Windows.Markup.XmlLanguage.GetLanguage(cultura.IetfLanguageTag)));
+
         // Evita que el programa se cierre cuando se cierre la primera ventana
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
