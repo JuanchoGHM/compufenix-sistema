@@ -97,6 +97,10 @@ public partial class MainWindow : Window
         MostrarModulo(new UsuariosView(), BtnUsuarios);
     }
 
+    private void Reportes_Click(object sender, RoutedEventArgs e)
+    {
+        MostrarModulo(new ReportesView(), BtnReportes);
+    }
 
     // ===== Resumen del Inicio =====
 

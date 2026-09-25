@@ -63,7 +63,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnReportes" Style="{StaticResource BotonMenuOscuro}" IsEnabled="False">
+                    <Button x:Name="BtnReportes" Click="Reportes_Click" Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8A5;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
