@@ -20,14 +20,6 @@
                 </Grid.RowDefinitions>
 
                 <!-- Logo -->
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Border Width="52" Height="52" CornerRadius="14">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Assets/logo.jpg" Stretch="UniformToFill"/>
-                        </Border.Background>
-                    </Border>
-                
-                </StackPanel>
 
                 <!-- Mensaje central -->
                 <StackPanel Grid.Row="1" VerticalAlignment="Center">
