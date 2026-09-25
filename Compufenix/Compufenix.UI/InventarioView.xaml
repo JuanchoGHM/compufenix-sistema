@@ -99,12 +99,15 @@
                                          Binding="{Binding PrecioUnitario, StringFormat={}{0:C}}"
                                          Width="130"/>
 
-                    <DataGridTemplateColumn Header="" Width="90" MinWidth="90">       
+                    <DataGridTemplateColumn Header="" Width="130" MinWidth="130">                        
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                    <Button Content="&#xE81E;" Style="{StaticResource BotonIcono}"
                                             Width="28" Height="28"
+                                            ToolTip="Registrar movimiento" Click="Movimiento_Click"/>
+                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28" Margin="2,0,0,0"
                                             ToolTip="Editar" Click="Editar_Click"/>
                                     <Button Content="&#xE74D;" Style="{StaticResource BotonIcono}"
                                             Width="28" Height="28"

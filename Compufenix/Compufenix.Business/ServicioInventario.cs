@@ -78,4 +78,40 @@ public class ServicioInventario
         _db.Productos.Remove(producto);
         _db.SaveChanges();
     }
+
+
+    // Registra una entrada o salida de stock y actualiza el producto
+    public void RegistrarMovimiento(int idProducto, TipoMovimiento tipo, int cantidad)
+    {
+        if (cantidad <= 0)
+            throw new ArgumentException("La cantidad debe ser mayor a cero.");
+
+        var producto = _db.Productos.Find(idProducto)
+            ?? throw new InvalidOperationException("El producto ya no existe.");
+
+        if (tipo == TipoMovimiento.Salida && cantidad > producto.StockActual)
+            throw new InvalidOperationException(
+                $"No hay suficiente stock. Disponible: {producto.StockActual}.");
+
+        producto.StockActual += tipo == TipoMovimiento.Entrada ? cantidad : -cantidad;
+
+        _db.MovimientosInventario.Add(new MovimientoInventario
+        {
+            IdProducto = idProducto,
+            Tipo = tipo,
+            Cantidad = cantidad,
+            Fecha = DateTime.Now
+        });
+
+        _db.SaveChanges();
+    }
+
+    // Historial de movimientos de un producto, del más reciente al más antiguo
+    public List<MovimientoInventario> ObtenerMovimientos(int idProducto)
+    {
+        return _db.MovimientosInventario
+            .Where(m => m.IdProducto == idProducto)
+            .OrderByDescending(m => m.Fecha)
+            .ToList();
+    }
 }

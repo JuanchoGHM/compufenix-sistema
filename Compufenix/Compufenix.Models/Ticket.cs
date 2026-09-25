@@ -14,10 +14,9 @@ public class Ticket
     public string? Diagnostico { get; set; }
     public decimal CostoTotal { get; set; }
 
+    [ForeignKey("IdEquipo")]
     public Equipo? Equipo { get; set; }
 
-    // El técnico es un Usuario; esta línea le explica a Entity Framework
-    // que IdTecnico apunta a la tabla de usuarios
     [ForeignKey("IdTecnico")]
     public Usuario? Tecnico { get; set; }
 }
