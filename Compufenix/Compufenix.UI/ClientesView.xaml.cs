@@ -31,6 +31,16 @@ public partial class ClientesView : UserControl
         CargarClientes(TxtBuscar.Text);
     }
 
+    private void VerEquipos_Click(object sender, RoutedEventArgs e)
+    {
+        var boton = (Button)sender;
+        var cliente = (Cliente)boton.DataContext;
+
+        var ventana = new FichaClienteWindow(cliente) { Owner = Window.GetWindow(this) };
+        ventana.ShowDialog();
+    }
+
+
     private void NuevoCliente_Click(object sender, RoutedEventArgs e)
     {
         var ventana = new ClienteWindow { Owner = Window.GetWindow(this) };
