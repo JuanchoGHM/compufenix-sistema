@@ -22,6 +22,8 @@ public partial class MovimientoWindow : Window
         _producto = producto;
         TxtProducto.Text = $"{producto.Nombre} · Stock actual: {producto.StockActual}";
         CargarHistorial();
+        this.CentrarEnPantalla();
+
     }
 
     private void CargarHistorial()

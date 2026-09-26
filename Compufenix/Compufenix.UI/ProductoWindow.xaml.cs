@@ -12,6 +12,7 @@ public partial class ProductoWindow : Window
     public ProductoWindow(Producto? producto = null)
     {
         InitializeComponent();
+        this.CentrarEnPantalla();
 
         _producto = producto ?? new Producto();
 

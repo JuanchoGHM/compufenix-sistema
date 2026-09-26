@@ -4,9 +4,9 @@
         Title="COMPUFENIX"
         Width="500" SizeToContent="Height"
         Background="{StaticResource FondoBrush}"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="Manual"
         ResizeMode="NoResize">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700">
         <Border Background="{StaticResource SuperficieBrush}"
                 BorderBrush="{StaticResource BordeBrush}"
                 BorderThickness="1"
