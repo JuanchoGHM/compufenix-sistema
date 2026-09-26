@@ -59,6 +59,7 @@ public class ServicioInventario
             existente.StockActual = producto.StockActual;
             existente.StockMinimo = producto.StockMinimo;
             existente.PrecioUnitario = producto.PrecioUnitario;
+            existente.FechaIncorporacion = producto.FechaIncorporacion;
         }
 
         _db.SaveChanges();

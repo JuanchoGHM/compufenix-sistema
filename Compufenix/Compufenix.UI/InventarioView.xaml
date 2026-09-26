@@ -99,6 +99,10 @@
                                          Binding="{Binding PrecioUnitario, StringFormat={}{0:C}}"
                                          Width="130"/>
 
+                    <DataGridTextColumn Header="INCORPORADO"
+                                         Binding="{Binding FechaIncorporacion, StringFormat=dd/MM/yyyy}"
+                                         Width="120" Foreground="{StaticResource TextoSuaveBrush}"/>
+
                     <DataGridTemplateColumn Header="" Width="130" MinWidth="130">                        
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

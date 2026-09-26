@@ -15,6 +15,7 @@ public partial class ProductoWindow : Window
         this.CentrarEnPantalla();
 
         _producto = producto ?? new Producto();
+        FechaIncorporacion.SelectedDate = _producto.FechaIncorporacion;
 
         if (producto != null)
         {
@@ -56,6 +57,7 @@ public partial class ProductoWindow : Window
         _producto.StockActual = stockActual;
         _producto.StockMinimo = stockMinimo;
         _producto.PrecioUnitario = precio;
+        _producto.FechaIncorporacion = FechaIncorporacion.SelectedDate ?? DateTime.Now;
 
         try
         {

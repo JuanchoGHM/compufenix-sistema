@@ -62,3 +62,6 @@ CREATE TABLE movimientos_inventario (
   FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
   FOREIGN KEY (id_ticket)   REFERENCES tickets(id_ticket)
 );
+
+ALTER TABLE compufenix.productos
+ADD COLUMN fecha_incorporacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;

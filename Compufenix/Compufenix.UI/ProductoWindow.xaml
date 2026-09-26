@@ -50,7 +50,10 @@
                 </Grid>
 
                 <TextBlock Text="Precio unitario" Style="{StaticResource Etiqueta}"/>
-                <TextBox x:Name="TxtPrecio" Margin="0,0,0,12"/>
+                <TextBox x:Name="TxtPrecio" Margin="0,0,0,16"/>
+
+                <TextBlock Text="Fecha de incorporación" Style="{StaticResource Etiqueta}"/>
+                <DatePicker x:Name="FechaIncorporacion" Margin="0,0,0,12"/>
 
                 <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
                         Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">

@@ -11,6 +11,7 @@ public class Producto
     public int StockActual { get; set; }
     public int StockMinimo { get; set; }
     public decimal PrecioUnitario { get; set; }
+    public DateTime FechaIncorporacion { get; set; } = DateTime.Now;
 
     // No se guarda en la base de datos: se calcula solo, para mostrar en pantalla
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
