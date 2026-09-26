@@ -8,6 +8,29 @@ namespace Compufenix.UI;
 
 public partial class MainWindow : Window
 {
+    private class FilaTicketAntiguoMostrar
+    {
+        public string Cliente { get; set; } = string.Empty;
+        public string Equipo { get; set; } = string.Empty;
+        public string NombreEstado { get; set; } = string.Empty;
+        public int DiasAbierto { get; set; }
+    }
+
+    private class FilaClienteMostrar
+    {
+        public string Cliente { get; set; } = string.Empty;
+        public int Cantidad { get; set; }
+        public double AnchoBarra { get; set; }
+    }
+
+    private class FilaMesMostrar
+    {
+        public string Mes { get; set; } = string.Empty;
+        public int Cantidad { get; set; }
+        public double AlturaBarra { get; set; }
+    }
+
+
     public MainWindow()
     {
         InitializeComponent();
@@ -115,11 +138,58 @@ public partial class MainWindow : Window
             TxtStockBajo.Text = resumen.StockBajo.ToString();
             TxtTicketsAbiertos.Text = resumen.TicketsAbiertos.ToString();
             TxtClientes.Text = resumen.Clientes.ToString();
+
+            CargarInicioExtra();
         }
         catch
         {
             // Si falla, las tarjetas se quedan con "—"
         }
+    }
+
+    private void CargarInicioExtra()
+    {
+        using var db = Configuracion.CrearDb();
+        var servicio = new ServicioReportes(db);
+
+        // Tickets más antiguos sin resolver
+        var antiguos = servicio.TicketsMasAntiguosSinResolver()
+            .Select(t => new FilaTicketAntiguoMostrar
+            {
+                Cliente = t.Cliente,
+                Equipo = t.Equipo,
+                NombreEstado = Textos.Mostrar(t.Estado),
+                DiasAbierto = t.DiasAbierto
+            }).ToList();
+
+        ListaTicketsAntiguos.ItemsSource = antiguos;
+        TxtSinAntiguos.Visibility = antiguos.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+        // Top clientes con más tickets (barra proporcional al máximo, hasta 220px)
+        var topClientes = servicio.TopClientesPorTickets();
+        int maximo = topClientes.Count > 0 ? topClientes.Max(c => c.CantidadTickets) : 1;
+
+        var filasTop = topClientes.Select(c => new FilaClienteMostrar
+        {
+            Cliente = c.Cliente,
+            Cantidad = c.CantidadTickets,
+            AnchoBarra = (double)c.CantidadTickets / maximo * 220
+        }).ToList();
+
+        ListaTopClientes.ItemsSource = filasTop;
+        TxtSinTopClientes.Visibility = filasTop.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+
+        // Tickets atendidos por mes (barra proporcional al mes con más tickets, hasta 120px)
+        var porMes = servicio.TicketsPorMes();
+        int maximoMes = porMes.Count > 0 ? Math.Max(porMes.Max(m => m.Cantidad), 1) : 1;
+
+        ListaTicketsPorMes.ItemsSource = porMes.Select(m => new FilaMesMostrar
+        {
+            Mes = m.Mes,
+            Cantidad = m.Cantidad,
+            AlturaBarra = Math.Max((double)m.Cantidad / maximoMes * 120, 4)
+        }).ToList();
     }
 
     // ===== Cerrar sesión =====
