@@ -2,15 +2,37 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ========== COLORES ========== -->
-    <SolidColorBrush x:Key="FondoBrush" Color="#F6F7F9"/>
+    <SolidColorBrush x:Key="FondoBrush" Color="#F4F5FB"/>
     <SolidColorBrush x:Key="SuperficieBrush" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="PrimarioBrush" Color="#2563EB"/>
-    <SolidColorBrush x:Key="PrimarioHoverBrush" Color="#1D4ED8"/>
-    <SolidColorBrush x:Key="PrimarioPresionadoBrush" Color="#1E40AF"/>
-    <SolidColorBrush x:Key="TextoBrush" Color="#111827"/>
-    <SolidColorBrush x:Key="TextoSuaveBrush" Color="#6B7280"/>
-    <SolidColorBrush x:Key="BordeBrush" Color="#E5E7EB"/>
-    <SolidColorBrush x:Key="HoverSuaveBrush" Color="#F3F4F6"/>
+    <SolidColorBrush x:Key="PrimarioBrush" Color="#4F46E5"/>
+    <SolidColorBrush x:Key="PrimarioHoverBrush" Color="#4338CA"/>
+    <SolidColorBrush x:Key="PrimarioPresionadoBrush" Color="#3730A3"/>
+    <SolidColorBrush x:Key="TextoBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="TextoSuaveBrush" Color="#64748B"/>
+    <SolidColorBrush x:Key="BordeBrush" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="HoverSuaveBrush" Color="#EEF2FF"/>
+
+    <!-- Degradados -->
+    <LinearGradientBrush x:Key="BarraLateralBrush" StartPoint="0,0" EndPoint="0.6,1">
+        <GradientStop Color="#1E1B4B" Offset="0"/>
+        <GradientStop Color="#3730A3" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradIndigo" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#818CF8" Offset="0"/>
+        <GradientStop Color="#4F46E5" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradViolet" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#C084FC" Offset="0"/>
+        <GradientStop Color="#7C3AED" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradTeal" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#2DD4BF" Offset="0"/>
+        <GradientStop Color="#0D9488" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradAmber" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FBBF24" Offset="0"/>
+        <GradientStop Color="#F97316" Offset="1"/>
+    </LinearGradientBrush>
 
     <!-- ========== TEXTOS ========== -->
     <Style x:Key="Marca" TargetType="TextBlock">
@@ -202,6 +224,69 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Fondo" Property="Opacity" Value="0.45"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========== MENÚ LATERAL OSCURO ========== -->
+    <Style x:Key="BotonMenuOscuro" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#C7D2FE"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Padding" Value="14,11"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Fondo"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Fondo" Property="Background" Value="#26FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Fondo" Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========== BOTÓN CERRAR SESIÓN (sobre fondo oscuro) ========== -->
+    <Style x:Key="BotonCerrarSesion" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Fondo"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="#40FFFFFF"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Fondo" Property="Background" Value="#26FFFFFF"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

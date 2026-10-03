@@ -1,40 +1,49 @@
 ﻿<Window x:Class="Compufenix.UI.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Compufenix.UI"
         Title="COMPUFENIX"
-        Width="420" SizeToContent="Height"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Background="{StaticResource FondoBrush}"
+        WindowState="Maximized"
+        MinWidth="900" MinHeight="600"
+        Background="White"
         FocusManager.FocusedElement="{Binding ElementName=TxtCorreo}">
-    <Border Background="{StaticResource SuperficieBrush}"
-            BorderBrush="{StaticResource BordeBrush}"
-            BorderThickness="1"
-            CornerRadius="16"
-            Margin="24"
-            Padding="32">
-        <StackPanel>
-            <TextBlock Text="COMPUFENIX" Style="{StaticResource Marca}"/>
-            <TextBlock Text="Iniciar sesión"
-                       Style="{StaticResource Titulo}" Margin="0,6,0,0"/>
-            <TextBlock Text="Ingresa tus credenciales para continuar."
-                       Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.1*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Correo" Style="{StaticResource Etiqueta}"/>
-            <TextBox x:Name="TxtCorreo" Margin="0,0,0,16"/>
+        <!-- Panel izquierdo -->
+        <local:PanelMarca Grid.Column="0"/>
 
-            <TextBlock Text="Contraseña" Style="{StaticResource Etiqueta}"/>
-            <PasswordBox x:Name="TxtContrasena" Margin="0,0,0,12"/>
+        <!-- Formulario -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Width="360" Margin="24"
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock x:Name="TxtError"
-                       Foreground="#DC2626"
-                       FontSize="12"
-                       TextWrapping="Wrap"
-                       Visibility="Collapsed"
-                       Margin="0,0,0,12"/>
+                <TextBlock Text="Bienvenido de nuevo" Style="{StaticResource Titulo}"/>
+                <TextBlock Text="Inicia sesión para continuar."
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,32"/>
 
-            <Button Content="Entrar" IsDefault="True"
-                    Click="Entrar_Click" Margin="0,12,0,0"/>
-        </StackPanel>
-    </Border>
+                <TextBlock Text="Correo" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtCorreo" Margin="0,0,0,18"/>
+
+                <TextBlock Text="Contraseña" Style="{StaticResource Etiqueta}"/>
+                <PasswordBox x:Name="TxtContrasena" Margin="0,0,0,12"/>
+
+                <TextBlock x:Name="TxtError"
+                           Foreground="#DC2626" FontSize="12"
+                           TextWrapping="Wrap"
+                           Visibility="Collapsed"
+                           Margin="0,0,0,8"/>
+
+                <Button Content="Entrar" IsDefault="True"
+                        Click="Entrar_Click" Margin="0,16,0,0"/>
+
+                <TextBlock Text="¿Problemas para entrar? Contacta al administrador."
+                           Style="{StaticResource Subtitulo}"
+                           HorizontalAlignment="Center" Margin="0,24,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
