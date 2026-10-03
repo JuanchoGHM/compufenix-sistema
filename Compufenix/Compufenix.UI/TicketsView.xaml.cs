@@ -33,6 +33,15 @@ public partial class TicketsView : UserControl
     {
         CargarTickets(TxtBuscar.Text);
     }
+    private void Ver_Click(object sender, RoutedEventArgs e)
+    {
+        var boton = (Button)sender;
+        var ticket = (Ticket)boton.DataContext;
+
+        var ventana = new VerTicketWindow(ticket.IdTicket) { Owner = Window.GetWindow(this) };
+        ventana.ShowDialog();
+    }
+
     private void Editar_Click(object sender, RoutedEventArgs e)
     {
         var boton = (Button)sender;

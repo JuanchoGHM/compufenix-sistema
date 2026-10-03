@@ -16,6 +16,7 @@ public partial class NuevoTicketWindow : Window
     public NuevoTicketWindow()
     {
         InitializeComponent();
+        FechaIngreso.SelectedDate = DateTime.Now;
         CargarListas();
         this.CentrarEnPantalla();
 
@@ -47,6 +48,11 @@ public partial class NuevoTicketWindow : Window
             MostrarError("Debes seleccionar un equipo.");
             return;
         }
+        if (FechaIngreso.SelectedDate is not DateTime fecha)
+        {
+            MostrarError("Debes seleccionar una fecha de ingreso.");
+            return;
+        }
 
         var tecnicoElegido = CmbTecnico.SelectedItem as Usuario;
 
@@ -54,6 +60,7 @@ public partial class NuevoTicketWindow : Window
         {
             IdEquipo = equipoElegido.IdEquipo,
             IdTecnico = tecnicoElegido?.IdUsuario,
+            FechaIngreso = fecha,
             Diagnostico = TxtDiagnostico.Text
         };
 

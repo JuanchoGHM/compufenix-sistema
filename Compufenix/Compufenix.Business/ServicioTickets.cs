@@ -37,8 +37,10 @@ public class ServicioTickets
         if (ticket.IdEquipo == 0)
             throw new ArgumentException("Debe seleccionar un equipo.");
 
+        if (ticket.FechaIngreso > DateTime.Now)
+            throw new ArgumentException("La fecha de ingreso no puede ser futura.");
+
         ticket.Estado = EstadoTicket.Recibido;
-        ticket.FechaIngreso = DateTime.Now;
 
         _db.Tickets.Add(ticket);
         _db.SaveChanges();

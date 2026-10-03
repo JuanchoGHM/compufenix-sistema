@@ -44,6 +44,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
+                <TextBlock Text="Fecha de ingreso" Style="{StaticResource Etiqueta}"/>
+                <DatePicker x:Name="FechaIngreso" Margin="0,0,0,16"/>
+
                 <TextBlock Text="Diagnóstico inicial" Style="{StaticResource Etiqueta}"/>
                 <TextBox x:Name="TxtDiagnostico" Margin="0,0,0,12"
                          AcceptsReturn="True" TextWrapping="Wrap" Height="80"/>
