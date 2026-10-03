@@ -18,6 +18,14 @@
 
         <!-- Formulario (siempre en modo claro, sin importar el tema elegido) -->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Resources>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Background" Value="White"/>
+                </Style>
+                <Style TargetType="PasswordBox" BasedOn="{StaticResource {x:Type PasswordBox}}">
+                    <Setter Property="Background" Value="White"/>
+                </Style>
+            </ScrollViewer.Resources>
             <StackPanel Width="360" Margin="24"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
 

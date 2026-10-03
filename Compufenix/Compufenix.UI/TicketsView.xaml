@@ -28,7 +28,7 @@
                         Margin="0,0,8,0" Click="Exportar_Click"/>
                 <Popup x:Name="MenuExportar" Placement="Bottom" StaysOpen="False"
                        AllowsTransparency="True">
-                    <Border Background="White" BorderBrush="{DynamicResource BordeBrush}"
+                    <Border Background="{DynamicResource SuperficieBrush}" BorderBrush="{DynamicResource BordeBrush}"
                             BorderThickness="1" CornerRadius="8" Padding="4" Width="160">
                         <Border.Effect>
                             <DropShadowEffect Color="#0F172A" BlurRadius="16" ShadowDepth="4" Opacity="0.15"/>
@@ -132,7 +132,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        
+
         <Grid Grid.Row="3" Margin="0,16,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="BtnPaginaAnterior" Content="‹ Anterior"
