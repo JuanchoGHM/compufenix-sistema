@@ -102,9 +102,16 @@ public partial class ClientesView : UserControl
             new ServicioClientes(db).Eliminar(cliente.IdCliente);
             CargarClientes(TxtBuscar.Text);
         }
+        catch (InvalidOperationException ex)
+        {
+            // Mensajes propios, pensados para el usuario
+            AvisoDialog.Mostrar(Window.GetWindow(this), "No se puede eliminar", ex.Message, esError: true);
+        }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            // Errores inesperados
+            var mensaje = ex.InnerException?.Message ?? ex.Message;
+            AvisoDialog.Mostrar(Window.GetWindow(this), "No se pudo eliminar", mensaje, esError: true);
         }
     }
 }
