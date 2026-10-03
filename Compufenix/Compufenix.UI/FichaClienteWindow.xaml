@@ -1,0 +1,115 @@
+﻿<Window x:Class="Compufenix.UI.FichaClienteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="620" SizeToContent="Height"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="720">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock x:Name="TxtNombreCliente" Style="{StaticResource Titulo}"/>
+                <TextBlock x:Name="TxtDatosCliente"
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <!-- Formulario para agregar un equipo -->
+                <TextBlock Text="Agregar equipo" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Tipo" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtTipo"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Marca" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtMarca"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Modelo" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtModelo"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Número de serie" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtNumeroSerie"/>
+                    </StackPanel>
+                </Grid>
+
+                <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtError"
+                               Foreground="#DC2626" FontSize="12"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Button Content="+ Agregar equipo" HorizontalAlignment="Left"
+                        Click="AgregarEquipo_Click" Margin="0,0,0,28"/>
+
+                <!-- Lista de equipos -->
+                <TextBlock Text="Equipos registrados" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+
+                <ItemsControl x:Name="ListaEquipos">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource HoverSuaveBrush}"
+                                    CornerRadius="10" Padding="14,12" Margin="0,0,0,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="{Binding Titulo}" FontWeight="SemiBold"
+                                                   Foreground="{StaticResource TextoBrush}"/>
+                                        <TextBlock Text="{Binding Detalle}" FontSize="12"
+                                                   Foreground="{StaticResource TextoSuaveBrush}"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" Content="&#xE74D;"
+                                            Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28" Foreground="#DC2626"
+                                            Tag="{Binding IdEquipo}"
+                                            ToolTip="Eliminar equipo"
+                                            Click="EliminarEquipo_Click"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="TxtSinEquipos" Text="Este cliente todavía no tiene equipos registrados."
+                           Style="{StaticResource Subtitulo}"/>
+
+                <Button Content="Cerrar" Style="{StaticResource BotonSecundario}"
+                        HorizontalAlignment="Right" Margin="0,24,0,0"
+                        Click="Cerrar_Click"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>

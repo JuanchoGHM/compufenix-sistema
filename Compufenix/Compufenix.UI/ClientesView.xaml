@@ -55,12 +55,15 @@
                     <DataGridTextColumn Header="DIRECCIÓN" Binding="{Binding Direccion}" Width="2*"
                                          Foreground="{StaticResource TextoSuaveBrush}"/>
 
-                    <DataGridTemplateColumn Header="" Width="90" MinWidth="90">
+                    <DataGridTemplateColumn Header="" Width="130" MinWidth="130">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                    <Button Content="&#xE716;" Style="{StaticResource BotonIcono}"
                                             Width="28" Height="28"
+                                            ToolTip="Ver equipos" Click="VerEquipos_Click"/>
+                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28" Margin="2,0,0,0"
                                             ToolTip="Editar" Click="Editar_Click"/>
                                     <Button Content="&#xE74D;" Style="{StaticResource BotonIcono}"
                                             Width="28" Height="28"
