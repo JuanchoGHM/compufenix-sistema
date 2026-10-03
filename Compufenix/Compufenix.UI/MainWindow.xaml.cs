@@ -8,6 +8,8 @@ namespace Compufenix.UI;
 
 public partial class MainWindow : Window
 {
+    private MonitorInactividad? _monitorInactividad;
+
     private class FilaTicketAntiguoMostrar
     {
         public string Cliente { get; set; } = string.Empty;
@@ -29,7 +31,6 @@ public partial class MainWindow : Window
         public int Cantidad { get; set; }
         public double AlturaBarra { get; set; }
     }
-
 
     public MainWindow()
     {
@@ -55,6 +56,9 @@ public partial class MainWindow : Window
         BtnUsuarios.Visibility = visibilidadAdmin;
 
         CargarResumen();
+
+        _monitorInactividad = new MonitorInactividad(this, TimeSpan.FromMinutes(10));
+        _monitorInactividad.SesionExpirada += () => Dispatcher.Invoke(CerrarPorInactividad);
     }
 
     // ===== Navegación entre pantallas =====
@@ -179,7 +183,6 @@ public partial class MainWindow : Window
         ListaTopClientes.ItemsSource = filasTop;
         TxtSinTopClientes.Visibility = filasTop.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
-
         // Tickets atendidos por mes (barra proporcional al mes con más tickets, hasta 120px)
         var porMes = servicio.TicketsPorMes();
         int maximoMes = porMes.Count > 0 ? Math.Max(porMes.Max(m => m.Cantidad), 1) : 1;
@@ -196,6 +199,7 @@ public partial class MainWindow : Window
 
     private void CerrarSesion_Click(object sender, RoutedEventArgs e)
     {
+        _monitorInactividad?.Detener();
         Sesion.UsuarioActual = null;
         Hide();
 
@@ -203,6 +207,30 @@ public partial class MainWindow : Window
         if (login.ShowDialog() == true)
         {
             // Abre una ventana principal nueva con el usuario que entró
+            var nueva = new MainWindow();
+            Application.Current.MainWindow = nueva;
+            nueva.Show();
+        }
+        else
+        {
+            Application.Current.Shutdown();
+        }
+
+        Close();
+    }
+
+    private void CerrarPorInactividad()
+    {
+        _monitorInactividad?.Detener();
+        Sesion.UsuarioActual = null;
+        Hide();
+
+        AvisoDialog.Mostrar(this, "Sesión cerrada",
+            "Se cerró tu sesión automáticamente por inactividad.", esError: true);
+
+        var login = new LoginWindow();
+        if (login.ShowDialog() == true)
+        {
             var nueva = new MainWindow();
             Application.Current.MainWindow = nueva;
             nueva.Show();
