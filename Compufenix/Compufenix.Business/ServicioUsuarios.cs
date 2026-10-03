@@ -60,7 +60,8 @@ public class ServicioUsuarios
         return usuario;
     }
 
-    // Devuelve el usuario si el correo y la contraseña son correctos; si no, null
+    // Devuelve el usuario si el correo y la contraseña son correctos; si no, null.
+    // Lanza una excepción si la cuenta está bloqueada por demasiados intentos fallidos.
     public Usuario? IniciarSesion(string correo, string contrasena)
     {
         if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrEmpty(contrasena))
@@ -72,9 +73,37 @@ public class ServicioUsuarios
         if (usuario == null)
             return null;
 
-        return BCrypt.Net.BCrypt.Verify(contrasena, usuario.ContrasenaHash) ? usuario : null;
-    }
+        if (usuario.BloqueadoHasta.HasValue && usuario.BloqueadoHasta.Value > DateTime.Now)
+        {
+            throw new InvalidOperationException(
+                $"Cuenta bloqueada temporalmente por demasiados intentos fallidos. " +
+                $"Intenta de nuevo después de las {usuario.BloqueadoHasta.Value:HH:mm}.");
+        }
 
+        bool contrasenaCorrecta = BCrypt.Net.BCrypt.Verify(contrasena, usuario.ContrasenaHash);
+
+        if (contrasenaCorrecta)
+        {
+            usuario.IntentosFallidos = 0;
+            usuario.BloqueadoHasta = null;
+            _db.SaveChanges();
+            return usuario;
+        }
+
+        usuario.IntentosFallidos++;
+
+        if (usuario.IntentosFallidos >= 5)
+        {
+            usuario.BloqueadoHasta = DateTime.Now.AddMinutes(15);
+            usuario.IntentosFallidos = 0;
+            _db.SaveChanges();
+            throw new InvalidOperationException(
+                "Demasiados intentos fallidos. Esta cuenta quedó bloqueada por 15 minutos.");
+        }
+
+        _db.SaveChanges();
+        return null;
+    }
 
     // Lista de todos los usuarios, el más reciente primero
     public List<Usuario> ObtenerTodos()

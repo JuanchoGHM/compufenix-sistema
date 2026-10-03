@@ -13,5 +13,7 @@ public class Usuario
     public bool Activo { get; set; } = true;
     public string? CodigoRecuperacion { get; set; }
     public DateTime? CodigoExpira { get; set; }
+    public int IntentosFallidos { get; set; }
+    public DateTime? BloqueadoHasta { get; set; }
 
 }

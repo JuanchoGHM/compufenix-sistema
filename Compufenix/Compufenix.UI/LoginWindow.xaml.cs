@@ -33,12 +33,20 @@ public partial class LoginWindow : Window
             Sesion.UsuarioActual = usuario;
             DialogResult = true;
         }
+        catch (InvalidOperationException ex)
+        {
+            // Mensajes de bloqueo por intentos fallidos
+            TxtError.Text = ex.Message;
+            TxtError.Visibility = Visibility.Visible;
+            TxtContrasena.Clear();
+        }
         catch (Exception ex)
         {
             TxtError.Text = "No se pudo iniciar sesión: " + ex.Message;
             TxtError.Visibility = Visibility.Visible;
         }
     }
+
     private void OlvideContrasena_Click(object sender, RoutedEventArgs e)
     {
         var ventana = new RecuperarContrasenaWindow { Owner = this };
