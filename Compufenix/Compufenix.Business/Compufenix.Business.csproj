@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Compufenix.Data\Compufenix.Data.csproj" />
     <ProjectReference Include="..\Compufenix.Models\Compufenix.Models.csproj" />
   </ItemGroup>
