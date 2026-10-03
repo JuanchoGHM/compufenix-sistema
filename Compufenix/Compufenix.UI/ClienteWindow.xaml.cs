@@ -10,7 +10,9 @@ public partial class ClienteWindow : Window
 
     public ClienteWindow(Cliente? cliente = null)
     {
+
         InitializeComponent();
+        this.CentrarEnPantalla();
 
         _cliente = cliente ?? new Cliente();
 

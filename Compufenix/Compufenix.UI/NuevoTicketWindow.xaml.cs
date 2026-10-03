@@ -17,6 +17,8 @@ public partial class NuevoTicketWindow : Window
     {
         InitializeComponent();
         CargarListas();
+        this.CentrarEnPantalla();
+
     }
 
     private void CargarListas()

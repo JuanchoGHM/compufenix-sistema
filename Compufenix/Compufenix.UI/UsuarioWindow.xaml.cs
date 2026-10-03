@@ -9,6 +9,8 @@ public partial class UsuarioWindow : Window
     public UsuarioWindow()
     {
         InitializeComponent();
+        this.CentrarEnPantalla();
+
         CmbRol.ItemsSource = Enum.GetValues<RolUsuario>();
         CmbRol.SelectedItem = RolUsuario.Tecnico;
     }
