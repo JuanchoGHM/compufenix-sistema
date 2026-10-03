@@ -18,4 +18,13 @@
     <ProjectReference Include="..\Compufenix.Models\Compufenix.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.example.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
