@@ -11,4 +11,7 @@ public class Usuario
     public string ContrasenaHash { get; set; } = string.Empty;
     public RolUsuario Rol { get; set; }
     public bool Activo { get; set; } = true;
+    public string? CodigoRecuperacion { get; set; }
+    public DateTime? CodigoExpira { get; set; }
+
 }

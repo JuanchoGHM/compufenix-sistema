@@ -40,6 +40,13 @@
                 <Button Content="Entrar" IsDefault="True"
                         Click="Entrar_Click" Margin="0,16,0,0"/>
 
+                <TextBlock HorizontalAlignment="Center" Margin="0,16,0,0">
+                    <Hyperlink Click="OlvideContrasena_Click" TextDecorations="None">
+                        <TextBlock Text="¿Olvidaste tu contraseña?"
+                                   Foreground="{StaticResource PrimarioBrush}" FontSize="13"/>
+                    </Hyperlink>
+                </TextBlock>
+                
                 <TextBlock Text="¿Problemas para entrar? Contacta al administrador."
                            Style="{StaticResource Subtitulo}"
                            HorizontalAlignment="Center" Margin="0,24,0,0"/>

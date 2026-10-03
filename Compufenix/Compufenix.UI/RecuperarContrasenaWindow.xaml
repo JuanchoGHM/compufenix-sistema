@@ -1,0 +1,79 @@
+﻿<Window x:Class="Compufenix.UI.RecuperarContrasenaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="440" SizeToContent="Height" MaxHeight="700"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="Manual"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE72E;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="Recuperar contraseña" Style="{StaticResource Titulo}"/>
+                <TextBlock Text="Te enviaremos un código a tu correo."
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <!-- Paso 1: pedir el código -->
+                <StackPanel x:Name="PanelPaso1">
+                    <TextBlock Text="Correo" Style="{StaticResource Etiqueta}"/>
+                    <TextBox x:Name="TxtCorreo" Margin="0,0,0,12"/>
+
+                    <Border x:Name="PanelError1" Background="#FEF2F2" CornerRadius="8"
+                            Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                        <TextBlock x:Name="TxtError1" Foreground="#DC2626" FontSize="12" TextWrapping="Wrap"/>
+                    </Border>
+
+                    <Button Content="Enviar código" Click="EnviarCodigo_Click"/>
+                </StackPanel>
+
+                <!-- Paso 2: código + nueva contraseña -->
+                <StackPanel x:Name="PanelPaso2" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtCorreoEnviado" Style="{StaticResource Subtitulo}" Margin="0,0,0,16"/>
+
+                    <TextBlock Text="Código recibido" Style="{StaticResource Etiqueta}"/>
+                    <TextBox x:Name="TxtCodigo" Margin="0,0,0,16"/>
+
+                    <TextBlock Text="Nueva contraseña (mínimo 6 caracteres)" Style="{StaticResource Etiqueta}"/>
+                    <Grid Margin="0,0,0,16">
+                        <PasswordBox x:Name="TxtNuevaContrasena"/>
+                        <TextBox x:Name="TxtNuevaContrasenaVisible" Visibility="Collapsed"/>
+                        <Button Content="&#xE7B3;" Style="{StaticResource BotonIcono}"
+                                Width="28" Height="28"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Margin="0,0,4,0" Click="MostrarNueva_Click"/>
+                    </Grid>
+
+                    <TextBlock Text="Repetir contraseña" Style="{StaticResource Etiqueta}"/>
+                    <Grid Margin="0,0,0,12">
+                        <PasswordBox x:Name="TxtRepetirContrasena"/>
+                        <TextBox x:Name="TxtRepetirContrasenaVisible" Visibility="Collapsed"/>
+                        <Button Content="&#xE7B3;" Style="{StaticResource BotonIcono}"
+                                Width="28" Height="28"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Margin="0,0,4,0" Click="MostrarRepetir_Click"/>
+                    </Grid>
+
+                    <Border x:Name="PanelError2" Background="#FEF2F2" CornerRadius="8"
+                            Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                        <TextBlock x:Name="TxtError2" Foreground="#DC2626" FontSize="12" TextWrapping="Wrap"/>
+                    </Border>
+
+                    <Button Content="Restablecer contraseña" Click="Restablecer_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>

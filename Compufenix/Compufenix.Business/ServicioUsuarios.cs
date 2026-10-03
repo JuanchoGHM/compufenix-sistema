@@ -153,4 +153,42 @@ public class ServicioUsuarios
     }
 
 
+    // Genera un código de 6 dígitos, válido por 15 minutos. Devuelve null si no hay
+    // ningún usuario activo con ese correo (así no revelamos si el correo existe).
+    public string? GenerarCodigoRecuperacion(string correo)
+    {
+        var correoLimpio = correo.Trim();
+        var usuario = _db.Usuarios.FirstOrDefault(u => u.Correo == correoLimpio && u.Activo);
+        if (usuario == null) return null;
+
+        var codigo = new Random().Next(100000, 999999).ToString();
+        usuario.CodigoRecuperacion = codigo;
+        usuario.CodigoExpira = DateTime.Now.AddMinutes(15);
+        _db.SaveChanges();
+
+        return codigo;
+    }
+
+    // Cambia la contraseña si el código coincide y no ha expirado
+    public void RestablecerContrasena(string correo, string codigo, string nuevaContrasena)
+    {
+        if (string.IsNullOrEmpty(nuevaContrasena) || nuevaContrasena.Length < 6)
+            throw new ArgumentException("La nueva contraseña debe tener al menos 6 caracteres.");
+
+        var correoLimpio = correo.Trim();
+        var usuario = _db.Usuarios.FirstOrDefault(u => u.Correo == correoLimpio && u.Activo)
+            ?? throw new InvalidOperationException("Correo o código incorrectos.");
+
+        if (usuario.CodigoRecuperacion != codigo ||
+            usuario.CodigoExpira == null || usuario.CodigoExpira < DateTime.Now)
+        {
+            throw new InvalidOperationException("El código es incorrecto o ha expirado. Solicita uno nuevo.");
+        }
+
+        usuario.ContrasenaHash = BCrypt.Net.BCrypt.HashPassword(nuevaContrasena);
+        usuario.CodigoRecuperacion = null;
+        usuario.CodigoExpira = null;
+        _db.SaveChanges();
+    }
+
 }

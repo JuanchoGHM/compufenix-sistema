@@ -39,4 +39,9 @@ public partial class LoginWindow : Window
             TxtError.Visibility = Visibility.Visible;
         }
     }
+    private void OlvideContrasena_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = new RecuperarContrasenaWindow { Owner = this };
+        ventana.ShowDialog();
+    }
 }
