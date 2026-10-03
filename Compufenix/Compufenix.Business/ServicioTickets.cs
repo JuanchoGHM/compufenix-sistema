@@ -109,4 +109,35 @@ public class ServicioTickets
             .First(t => t.IdTicket == idTicket);
     }
 
+    // Actualiza equipo, técnico, estado, fecha de ingreso y diagnóstico de un ticket
+    public void Editar(int idTicket, int idEquipo, int? idTecnico,
+        EstadoTicket estado, DateTime fechaIngreso, string? diagnostico)
+    {
+        if (idEquipo == 0)
+            throw new ArgumentException("Debes seleccionar un equipo.");
+
+        var ticket = _db.Tickets.Find(idTicket)
+            ?? throw new InvalidOperationException("El ticket ya no existe.");
+
+        ticket.IdEquipo = idEquipo;
+        ticket.IdTecnico = idTecnico;
+        ticket.Estado = estado;
+        ticket.FechaIngreso = fechaIngreso;
+        ticket.Diagnostico = diagnostico;
+        _db.SaveChanges();
+    }
+
+    public void Eliminar(int idTicket)
+    {
+        var ticket = _db.Tickets.Find(idTicket);
+        if (ticket == null) return;
+
+        bool tieneMovimientos = _db.MovimientosInventario.Any(m => m.IdTicket == idTicket);
+        if (tieneMovimientos)
+            throw new InvalidOperationException(
+                "No se puede eliminar: este ticket ya tiene repuestos utilizados registrados.");
+
+        _db.Tickets.Remove(ticket);
+        _db.SaveChanges();
+    }
 }

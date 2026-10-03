@@ -14,9 +14,26 @@
                 <TextBlock Text="Seguimiento de las reparaciones en curso."
                            Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
             </StackPanel>
-            <Button Content="+ Nuevo ticket"
-                    HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Click="NuevoTicket_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Content="Exportar ▾" Style="{StaticResource BotonSecundario}"
+                        Margin="0,0,8,0" Click="Exportar_Click"/>
+                <Popup x:Name="MenuExportar" Placement="Bottom" StaysOpen="False"
+                       AllowsTransparency="True">
+                    <Border Background="White" BorderBrush="{StaticResource BordeBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="4" Width="160">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#0F172A" BlurRadius="16" ShadowDepth="4" Opacity="0.15"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Button Content="Exportar a Excel" Style="{StaticResource BotonMenu}"
+                                    Click="ExportarExcel_Click"/>
+                            <Button Content="Exportar a PDF" Style="{StaticResource BotonMenu}"
+                                    Click="ExportarPdf_Click"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <Button Content="+ Nuevo ticket" Click="NuevoTicket_Click"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,0,0,16">
@@ -64,6 +81,22 @@
                     <DataGridTextColumn Header="INGRESO"
                                          Binding="{Binding FechaIngreso, StringFormat=dd/MM/yyyy}"
                                          Width="*" Foreground="{StaticResource TextoSuaveBrush}"/>
+
+                    <DataGridTemplateColumn Header="" Width="90" MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28"
+                                            ToolTip="Editar" Click="Editar_Click"/>
+                                    <Button Content="&#xE74D;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28"
+                                            Foreground="#DC2626" Margin="2,0,0,0"
+                                            ToolTip="Eliminar" Click="Eliminar_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

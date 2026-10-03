@@ -1,0 +1,33 @@
+﻿<Window x:Class="Compufenix.UI.AvisoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="420" SizeToContent="Height" MaxHeight="700"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="Manual"
+        ResizeMode="NoResize">
+    <Border Background="{StaticResource SuperficieBrush}"
+            BorderBrush="{StaticResource BordeBrush}"
+            BorderThickness="1"
+            CornerRadius="16"
+            Margin="24"
+            Padding="32">
+        <StackPanel>
+            <Border x:Name="CirculoIcono" Width="52" Height="52" CornerRadius="26"
+                    Background="#DCFCE7" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <TextBlock x:Name="TxtIcono" FontFamily="Segoe MDL2 Assets" Text="&#xE73E;"
+                           FontSize="22" Foreground="#16A34A"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+
+            <TextBlock x:Name="TxtTitulo" Text="Listo"
+                       FontSize="19" FontWeight="SemiBold"
+                       Foreground="{StaticResource TextoBrush}"/>
+            <TextBlock x:Name="TxtMensaje"
+                       Style="{StaticResource Subtitulo}"
+                       TextWrapping="Wrap" Margin="0,8,0,28"/>
+
+            <Button Content="Aceptar" HorizontalAlignment="Right" Click="Aceptar_Click"/>
+        </StackPanel>
+    </Border>
+</Window>

@@ -23,6 +23,16 @@ public class ServicioEquipos
     }
 
 
+    // Los equipos de un cliente específico, con su cliente ya cargado
+    public List<Equipo> ObtenerPorCliente(int idCliente)
+    {
+        return _db.Equipos
+            .Include(e => e.Cliente)
+            .Where(e => e.IdCliente == idCliente)
+            .OrderByDescending(e => e.IdEquipo)
+            .ToList();
+    }
+
     // Todos los equipos con su cliente ya cargado (para elegir uno al crear un ticket)
     public List<Equipo> ObtenerTodosConCliente()
     {
