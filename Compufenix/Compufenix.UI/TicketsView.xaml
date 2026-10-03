@@ -10,10 +10,18 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,20">
-            <StackPanel>
-                <TextBlock Text="Tickets de servicio" Style="{StaticResource Titulo}" FontSize="28"/>
-                <TextBlock Text="Seguimiento de las reparaciones en curso."
-                           Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="52" Height="52" CornerRadius="14"
+                        Background="{DynamicResource HoverSuaveBrush}" VerticalAlignment="Top">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Tickets de servicio" Style="{StaticResource Titulo}" FontSize="28"/>
+                    <TextBlock Text="Seguimiento de las reparaciones en curso."
+                               Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button Content="Exportar ▾" Style="{StaticResource BotonSecundario}"

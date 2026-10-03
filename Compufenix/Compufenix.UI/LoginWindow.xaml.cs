@@ -5,6 +5,8 @@ namespace Compufenix.UI;
 
 public partial class LoginWindow : Window
 {
+    private bool _contrasenaVisible;
+
     public LoginWindow()
     {
         InitializeComponent();
@@ -18,8 +20,7 @@ public partial class LoginWindow : Window
         {
             using var db = Configuracion.CrearDb();
             var servicio = new ServicioUsuarios(db);
-            var usuario = servicio.IniciarSesion(TxtCorreo.Text, TxtContrasena.Password);
-
+            var usuario = servicio.IniciarSesion(TxtCorreo.Text, ObtenerContrasena());
             if (usuario == null)
             {
                 TxtError.Text = "Correo o contraseña incorrectos.";
@@ -46,6 +47,28 @@ public partial class LoginWindow : Window
             TxtError.Visibility = Visibility.Visible;
         }
     }
+
+    private string ObtenerContrasena() =>
+        _contrasenaVisible ? TxtContrasenaVisible.Text : TxtContrasena.Password;
+
+    private void MostrarContrasena_Click(object sender, RoutedEventArgs e)
+    {
+        _contrasenaVisible = !_contrasenaVisible;
+
+        if (_contrasenaVisible)
+        {
+            TxtContrasenaVisible.Text = TxtContrasena.Password;
+            TxtContrasena.Visibility = Visibility.Collapsed;
+            TxtContrasenaVisible.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            TxtContrasena.Password = TxtContrasenaVisible.Text;
+            TxtContrasenaVisible.Visibility = Visibility.Collapsed;
+            TxtContrasena.Visibility = Visibility.Visible;
+        }
+    }
+
 
     private void OlvideContrasena_Click(object sender, RoutedEventArgs e)
     {

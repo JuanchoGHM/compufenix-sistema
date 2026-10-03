@@ -11,10 +11,18 @@
 
         <!-- Título y botón -->
         <Grid Grid.Row="0" Margin="0,0,0,20">
-            <StackPanel>
-                <TextBlock Text="Inventario" Style="{StaticResource Titulo}" FontSize="28"/>
-                <TextBlock Text="Productos, repuestos y accesorios de COMPUFENIX."
-                           Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="52" Height="52" CornerRadius="14"
+                        Background="{DynamicResource HoverSuaveBrush}" VerticalAlignment="Top">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE719;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Inventario" Style="{StaticResource Titulo}" FontSize="28"/>
+                    <TextBlock Text="Productos, repuestos y accesorios de COMPUFENIX."
+                               Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+                </StackPanel>
             </StackPanel>
             <Button Content="+ Nuevo producto"
                     HorizontalAlignment="Right" VerticalAlignment="Top"

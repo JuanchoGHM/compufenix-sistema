@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40,36,40,36">
-            <TextBlock Text="Reportes" Style="{StaticResource Titulo}" FontSize="28"/>
-            <TextBlock Text="Resumen de inventario, tickets e ingresos."
-                       Style="{StaticResource Subtitulo}" Margin="0,6,0,28"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
+                <Border Width="52" Height="52" CornerRadius="14"
+                        Background="{DynamicResource HoverSuaveBrush}" VerticalAlignment="Top">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8A5;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Reportes" Style="{StaticResource Titulo}" FontSize="28"/>
+                    <TextBlock Text="Resumen de inventario, tickets e ingresos."
+                               Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+                </StackPanel>
+            </StackPanel>
 
             <!-- ===== Inventario ===== -->
             <Border Background="{DynamicResource SuperficieBrush}"
