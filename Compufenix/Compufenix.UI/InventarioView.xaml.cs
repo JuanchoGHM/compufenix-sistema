@@ -7,6 +7,8 @@ namespace Compufenix.UI;
 
 public partial class InventarioView : UserControl
 {
+    private readonly Paginador<Producto> _paginador = new();
+
     private readonly bool _soloStockBajo;
 
     public InventarioView(bool soloStockBajo = false)
@@ -27,12 +29,30 @@ public partial class InventarioView : UserControl
             if (_soloStockBajo)
                 productos = productos.Where(p => p.EstadoAlerta).ToList();
 
-            TablaProductos.ItemsSource = productos;
+            _paginador.Cargar(productos);
+            MostrarPaginaActual();
         }
         catch
         {
             // Si falla, la tabla se queda vacía por ahora
         }
+    }
+    private void MostrarPaginaActual()
+    {
+        TablaProductos.ItemsSource = _paginador.ObtenerPaginaActual();
+        TxtPagina.Text = _paginador.TextoPagina;
+        BtnPaginaAnterior.IsEnabled = _paginador.PaginaActual > 1;
+        BtnPaginaSiguiente.IsEnabled = _paginador.PaginaActual < _paginador.TotalPaginas;
+    }
+
+    private void PaginaAnterior_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Anterior()) MostrarPaginaActual();
+    }
+
+    private void PaginaSiguiente_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Siguiente()) MostrarPaginaActual();
     }
 
     private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)

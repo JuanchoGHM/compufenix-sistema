@@ -7,6 +7,8 @@ namespace Compufenix.UI;
 
 public partial class UsuariosView : UserControl
 {
+    private readonly Paginador<Usuario> _paginador = new();
+
     public UsuariosView()
     {
         InitializeComponent();
@@ -16,7 +18,27 @@ public partial class UsuariosView : UserControl
     private void CargarUsuarios()
     {
         using var db = Configuracion.CrearDb();
-        TablaUsuarios.ItemsSource = new ServicioUsuarios(db).ObtenerTodos();
+        var usuarios = new ServicioUsuarios(db).ObtenerTodos();
+        _paginador.Cargar(usuarios);
+        MostrarPaginaActual();
+    }
+
+    private void MostrarPaginaActual()
+    {
+        TablaUsuarios.ItemsSource = _paginador.ObtenerPaginaActual();
+        TxtPagina.Text = _paginador.TextoPagina;
+        BtnPaginaAnterior.IsEnabled = _paginador.PaginaActual > 1;
+        BtnPaginaSiguiente.IsEnabled = _paginador.PaginaActual < _paginador.TotalPaginas;
+    }
+
+    private void PaginaAnterior_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Anterior()) MostrarPaginaActual();
+    }
+
+    private void PaginaSiguiente_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Siguiente()) MostrarPaginaActual();
     }
 
     private void NuevoUsuario_Click(object sender, RoutedEventArgs e)

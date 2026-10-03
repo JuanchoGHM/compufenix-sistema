@@ -6,6 +6,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,20">
@@ -77,5 +78,19 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
+
+        <Grid Grid.Row="3" Margin="0,16,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="BtnPaginaAnterior" Content="‹ Anterior"
+                        Style="{StaticResource BotonSecundario}"
+                        Padding="14,8" Margin="0,0,8,0" Click="PaginaAnterior_Click"/>
+                <TextBlock x:Name="TxtPagina" VerticalAlignment="Center" Margin="8,0"
+                           Foreground="{StaticResource TextoSuaveBrush}" FontSize="13"/>
+                <Button x:Name="BtnPaginaSiguiente" Content="Siguiente ›"
+                        Style="{StaticResource BotonSecundario}"
+                        Padding="14,8" Margin="8,0,0,0" Click="PaginaSiguiente_Click"/>
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </UserControl>

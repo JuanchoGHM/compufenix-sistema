@@ -7,6 +7,7 @@ namespace Compufenix.UI;
 
 public partial class ClientesView : UserControl
 {
+    private readonly Paginador<Cliente> _paginador = new();
     public ClientesView()
     {
         InitializeComponent();
@@ -18,12 +19,32 @@ public partial class ClientesView : UserControl
         try
         {
             using var db = Configuracion.CrearDb();
-            TablaClientes.ItemsSource = new ServicioClientes(db).Buscar(texto);
+            var clientes = new ServicioClientes(db).Buscar(texto);
+            _paginador.Cargar(clientes);
+            MostrarPaginaActual();
         }
         catch
         {
             // La tabla se queda vacía si falla
         }
+    }
+
+    private void MostrarPaginaActual()
+    {
+        TablaClientes.ItemsSource = _paginador.ObtenerPaginaActual();
+        TxtPagina.Text = _paginador.TextoPagina;
+        BtnPaginaAnterior.IsEnabled = _paginador.PaginaActual > 1;
+        BtnPaginaSiguiente.IsEnabled = _paginador.PaginaActual < _paginador.TotalPaginas;
+    }
+
+    private void PaginaAnterior_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Anterior()) MostrarPaginaActual();
+    }
+
+    private void PaginaSiguiente_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Siguiente()) MostrarPaginaActual();
     }
 
     private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)

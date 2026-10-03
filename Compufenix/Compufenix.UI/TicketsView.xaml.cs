@@ -9,6 +9,8 @@ public partial class TicketsView : UserControl
 {
     private List<Ticket> _ticketsActuales = new();
 
+    private readonly Paginador<Ticket> _paginador = new();
+
     private readonly bool _soloAbiertos;
 
     private bool _cargandoFiltros = true;
@@ -44,12 +46,30 @@ public partial class TicketsView : UserControl
             }
 
             _ticketsActuales = tickets;
-            TablaTickets.ItemsSource = _ticketsActuales;
+            _paginador.Cargar(_ticketsActuales);
+            MostrarPaginaActual();
         }
         catch
         {
             // La tabla se queda vacía si falla
         }
+    }
+    private void MostrarPaginaActual()
+    {
+        TablaTickets.ItemsSource = _paginador.ObtenerPaginaActual();
+        TxtPagina.Text = _paginador.TextoPagina;
+        BtnPaginaAnterior.IsEnabled = _paginador.PaginaActual > 1;
+        BtnPaginaSiguiente.IsEnabled = _paginador.PaginaActual < _paginador.TotalPaginas;
+    }
+
+    private void PaginaAnterior_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Anterior()) MostrarPaginaActual();
+    }
+
+    private void PaginaSiguiente_Click(object sender, RoutedEventArgs e)
+    {
+        if (_paginador.Siguiente()) MostrarPaginaActual();
     }
 
     private void CmbFiltroEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
