@@ -2,36 +2,41 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ========== COLORES ========== -->
-    <SolidColorBrush x:Key="FondoBrush" Color="#F4F5FB"/>
+    <SolidColorBrush x:Key="FondoBrush" Color="#F5F7FB"/>
     <SolidColorBrush x:Key="SuperficieBrush" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="PrimarioBrush" Color="#4F46E5"/>
-    <SolidColorBrush x:Key="PrimarioHoverBrush" Color="#4338CA"/>
-    <SolidColorBrush x:Key="PrimarioPresionadoBrush" Color="#3730A3"/>
+    <SolidColorBrush x:Key="PrimarioBrush" Color="#EA580C"/>
+    <SolidColorBrush x:Key="PrimarioHoverBrush" Color="#C2410C"/>
+    <SolidColorBrush x:Key="PrimarioPresionadoBrush" Color="#9A3412"/>
     <SolidColorBrush x:Key="TextoBrush" Color="#0F172A"/>
     <SolidColorBrush x:Key="TextoSuaveBrush" Color="#64748B"/>
     <SolidColorBrush x:Key="BordeBrush" Color="#E2E8F0"/>
-    <SolidColorBrush x:Key="HoverSuaveBrush" Color="#EEF2FF"/>
+    <SolidColorBrush x:Key="HoverSuaveBrush" Color="#FFF1E6"/>
 
-    <!-- Degradados -->
+    <!-- Degradados con los colores del logo: azul eléctrico, naranja fuego y amarillo -->
     <LinearGradientBrush x:Key="BarraLateralBrush" StartPoint="0,0" EndPoint="0.6,1">
-        <GradientStop Color="#1E1B4B" Offset="0"/>
-        <GradientStop Color="#3730A3" Offset="1"/>
+        <GradientStop Color="#0A1B4D" Offset="0"/>
+        <GradientStop Color="#1E3A8A" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="GradIndigo" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#818CF8" Offset="0"/>
-        <GradientStop Color="#4F46E5" Offset="1"/>
+        <GradientStop Color="#60A5FA" Offset="0"/>
+        <GradientStop Color="#2563EB" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="GradViolet" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#C084FC" Offset="0"/>
-        <GradientStop Color="#7C3AED" Offset="1"/>
+        <GradientStop Color="#3B82F6" Offset="0"/>
+        <GradientStop Color="#1E3A8A" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="GradTeal" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#2DD4BF" Offset="0"/>
-        <GradientStop Color="#0D9488" Offset="1"/>
+        <GradientStop Color="#FB923C" Offset="0"/>
+        <GradientStop Color="#EA580C" Offset="1"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="GradAmber" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="#FBBF24" Offset="0"/>
-        <GradientStop Color="#F97316" Offset="1"/>
+        <GradientStop Color="#D97706" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="GradFuego" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FFD400" Offset="0"/>
+        <GradientStop Color="#F97316" Offset="0.6"/>
+        <GradientStop Color="#DC2626" Offset="1"/>
     </LinearGradientBrush>
 
     <!-- ========== TEXTOS ========== -->
@@ -234,7 +239,7 @@
     <!-- ========== MENÚ LATERAL OSCURO ========== -->
     <Style x:Key="BotonMenuOscuro" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#C7D2FE"/>
+        <Setter Property="Foreground" Value="#BFDBFE"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Padding" Value="14,11"/>
