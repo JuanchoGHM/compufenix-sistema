@@ -26,15 +26,15 @@
                      Padding="38,10"
                      TextChanged="TxtBuscar_TextChanged"/>
             <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
-                       Foreground="{StaticResource TextoSuaveBrush}"
+                       Foreground="{DynamicResource TextoSuaveBrush}"
                        FontSize="14"
                        HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="14,0,0,0" IsHitTestVisible="False"/>
         </Grid>
 
         <Border Grid.Row="2"
-                Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+                Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1" CornerRadius="16" Padding="8,8,20,8">
             <Border.Effect>
                 <DropShadowEffect Color="#0F172A" BlurRadius="20"
@@ -55,7 +55,7 @@
                     <DataGridTextColumn Header="TELÉFONO" Binding="{Binding Telefono}" Width="*"/>
                     <DataGridTextColumn Header="CORREO" Binding="{Binding Correo}" Width="2*"/>
                     <DataGridTextColumn Header="DIRECCIÓN" Binding="{Binding Direccion}" Width="2*"
-                                         Foreground="{StaticResource TextoSuaveBrush}"/>
+                                         Foreground="{DynamicResource TextoSuaveBrush}"/>
 
                     <DataGridTemplateColumn Header="" Width="130" MinWidth="130">
                         <DataGridTemplateColumn.CellTemplate>
@@ -85,7 +85,7 @@
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="0,0,8,0" Click="PaginaAnterior_Click"/>
                 <TextBlock x:Name="TxtPagina" VerticalAlignment="Center" Margin="8,0"
-                           Foreground="{StaticResource TextoSuaveBrush}" FontSize="13"/>
+                           Foreground="{DynamicResource TextoSuaveBrush}" FontSize="13"/>
                 <Button x:Name="BtnPaginaSiguiente" Content="Siguiente ›"
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="8,0,0,0" Click="PaginaSiguiente_Click"/>

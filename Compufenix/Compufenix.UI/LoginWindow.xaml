@@ -16,20 +16,26 @@
         <!-- Panel izquierdo -->
         <local:PanelMarca Grid.Column="0"/>
 
-        <!-- Formulario -->
+        <!-- Formulario (siempre en modo claro, sin importar el tema elegido) -->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Width="360" Margin="24"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBlock Text="Bienvenido de nuevo" Style="{StaticResource Titulo}"/>
+                <TextBlock Text="Bienvenido de nuevo" FontSize="24" FontWeight="SemiBold"
+                           Foreground="#0F172A"/>
                 <TextBlock Text="Inicia sesión para continuar."
-                           Style="{StaticResource Subtitulo}" Margin="0,6,0,32"/>
+                           FontSize="13" Foreground="#64748B" TextWrapping="Wrap"
+                           Margin="0,6,0,32"/>
 
-                <TextBlock Text="Correo" Style="{StaticResource Etiqueta}"/>
-                <TextBox x:Name="TxtCorreo" Margin="0,0,0,18"/>
+                <TextBlock Text="Correo" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <TextBox x:Name="TxtCorreo" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                         Margin="0,0,0,18"/>
 
-                <TextBlock Text="Contraseña" Style="{StaticResource Etiqueta}"/>
-                <PasswordBox x:Name="TxtContrasena" Margin="0,0,0,12"/>
+                <TextBlock Text="Contraseña" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <PasswordBox x:Name="TxtContrasena" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                             Margin="0,0,0,12"/>
 
                 <TextBlock x:Name="TxtError"
                            Foreground="#DC2626" FontSize="12"
@@ -46,9 +52,9 @@
                                    Foreground="{StaticResource PrimarioBrush}" FontSize="13"/>
                     </Hyperlink>
                 </TextBlock>
-                
+
                 <TextBlock Text="¿Problemas para entrar? Contacta al administrador."
-                           Style="{StaticResource Subtitulo}"
+                           FontSize="13" Foreground="#64748B" TextWrapping="Wrap"
                            HorizontalAlignment="Center" Margin="0,24,0,0"/>
             </StackPanel>
         </ScrollViewer>

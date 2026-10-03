@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
         Width="500" SizeToContent="Height"
-        Background="{StaticResource FondoBrush}"
+        Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="Manual"
         ResizeMode="NoResize">
     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700">
-        <Border Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+        <Border Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1"
                 CornerRadius="16"
                 Margin="24"
                 Padding="32">
             <StackPanel>
                 <Border Width="52" Height="52" CornerRadius="26"
-                        Background="{StaticResource HoverSuaveBrush}"
+                        Background="{DynamicResource HoverSuaveBrush}"
                         HorizontalAlignment="Left" Margin="0,0,0,20">
                     <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
                                FontSize="22" Foreground="{StaticResource PrimarioBrush}"

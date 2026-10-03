@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
         Width="640" SizeToContent="Height"
-        Background="{StaticResource FondoBrush}"
+        Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="760">
-        <Border Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+        <Border Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1"
                 CornerRadius="16"
                 Margin="24"
                 Padding="32">
             <StackPanel>
                 <Border Width="52" Height="52" CornerRadius="26"
-                        Background="{StaticResource HoverSuaveBrush}"
+                        Background="{DynamicResource HoverSuaveBrush}"
                         HorizontalAlignment="Left" Margin="0,0,0,20">
                     <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
                                FontSize="22" Foreground="{StaticResource PrimarioBrush}"
@@ -50,11 +50,11 @@
                            Visibility="Collapsed"/>
                 
 
-                <Border Height="1" Background="{StaticResource BordeBrush}" Margin="0,0,0,20"/>
+                <Border Height="1" Background="{DynamicResource BordeBrush}" Margin="0,0,0,20"/>
 
                 <!-- Repuestos -->
                 <TextBlock Text="Usar un repuesto" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+                           Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,12"/>
 
                 <Grid Margin="0,0,0,12">
                     <Grid.ColumnDefinitions>
@@ -84,7 +84,7 @@
 
                 <!-- Historial de repuestos -->
                 <TextBlock Text="Repuestos utilizados" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+                           Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,12"/>
 
                 <ItemsControl x:Name="ListaRepuestos">
                     <ItemsControl.ItemTemplate>
@@ -95,9 +95,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Descripcion}"
-                                           FontSize="13" Foreground="{StaticResource TextoBrush}"/>
+                                           FontSize="13" Foreground="{DynamicResource TextoBrush}"/>
                                 <TextBlock Grid.Column="1" Text="{Binding FechaTexto}"
-                                           FontSize="12" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                           FontSize="12" Foreground="{DynamicResource TextoSuaveBrush}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -105,11 +105,11 @@
                 <TextBlock x:Name="TxtSinRepuestos" Text="Todavía no se han usado repuestos en este ticket."
                            Style="{StaticResource Subtitulo}" Margin="0,0,0,20"/>
 
-                <Border Height="1" Background="{StaticResource BordeBrush}" Margin="0,0,0,16"/>
+                <Border Height="1" Background="{DynamicResource BordeBrush}" Margin="0,0,0,16"/>
 
                 <Grid>
                     <TextBlock Text="Costo total" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}"/>
+                               Foreground="{DynamicResource TextoBrush}"/>
                     <TextBlock x:Name="TxtCostoTotal" FontWeight="Bold" FontSize="18"
                                Foreground="{StaticResource PrimarioBrush}"
                                HorizontalAlignment="Right"/>

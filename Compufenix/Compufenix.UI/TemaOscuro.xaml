@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Estos "sobrescriben" los mismos nombres de Tema.xaml, solo para el modo oscuro -->
+    <SolidColorBrush x:Key="FondoBrush" Color="#0F172A"/>
+    <SolidColorBrush x:Key="SuperficieBrush" Color="#1E293B"/>
+    <SolidColorBrush x:Key="TextoBrush" Color="#F1F5F9"/>
+    <SolidColorBrush x:Key="TextoSuaveBrush" Color="#94A3B8"/>
+    <SolidColorBrush x:Key="BordeBrush" Color="#334155"/>
+    <SolidColorBrush x:Key="HoverSuaveBrush" Color="#334155"/>
+
+</ResourceDictionary>

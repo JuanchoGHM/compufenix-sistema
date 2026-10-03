@@ -7,6 +7,10 @@ namespace Compufenix.UI;
 
 public partial class InventarioView : UserControl
 {
+    // Se dispara cada vez que se guarda, elimina o registra un movimiento,
+    // para que la ventana principal pueda actualizar el punto rojo del menú
+    public event Action? DatosCambiaron;
+
     private readonly Paginador<Producto> _paginador = new();
 
     private readonly bool _soloStockBajo;
@@ -66,6 +70,7 @@ public partial class InventarioView : UserControl
         if (ventana.ShowDialog() == true)
         {
             CargarProductos(TxtBuscar.Text);
+            DatosCambiaron?.Invoke();
         }
     }
 
@@ -78,6 +83,7 @@ public partial class InventarioView : UserControl
         if (ventana.ShowDialog() == true)
         {
             CargarProductos(TxtBuscar.Text);
+            DatosCambiaron?.Invoke();
         }
     }
 
@@ -90,6 +96,7 @@ public partial class InventarioView : UserControl
         if (ventana.ShowDialog() == true)
         {
             CargarProductos(TxtBuscar.Text);
+            DatosCambiaron?.Invoke();
         }
     }
 
@@ -111,6 +118,7 @@ public partial class InventarioView : UserControl
             using var db = Configuracion.CrearDb();
             new ServicioInventario(db).Eliminar(producto.IdProducto);
             CargarProductos(TxtBuscar.Text);
+            DatosCambiaron?.Invoke();
         }
         catch (Exception ex)
         {

@@ -20,7 +20,7 @@
                         Margin="0,0,8,0" Click="Exportar_Click"/>
                 <Popup x:Name="MenuExportar" Placement="Bottom" StaysOpen="False"
                        AllowsTransparency="True">
-                    <Border Background="White" BorderBrush="{StaticResource BordeBrush}"
+                    <Border Background="White" BorderBrush="{DynamicResource BordeBrush}"
                             BorderThickness="1" CornerRadius="8" Padding="4" Width="160">
                         <Border.Effect>
                             <DropShadowEffect Color="#0F172A" BlurRadius="16" ShadowDepth="4" Opacity="0.15"/>
@@ -49,7 +49,7 @@
                          Padding="38,10"
                          TextChanged="TxtBuscar_TextChanged"/>
                 <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
-                           Foreground="{StaticResource TextoSuaveBrush}"
+                           Foreground="{DynamicResource TextoSuaveBrush}"
                            FontSize="14"
                            HorizontalAlignment="Left" VerticalAlignment="Center"
                            Margin="14,0,0,0" IsHitTestVisible="False"/>
@@ -66,8 +66,8 @@
         </Grid>
 
         <Border Grid.Row="2"
-                Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+                Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1" CornerRadius="16" Padding="8,8,20,8">
             <Border.Effect>
                 <DropShadowEffect Color="#0F172A" BlurRadius="20"
@@ -91,7 +91,7 @@
                                          SortMemberPath="Equipo.Tipo" Width="*"/>
                     <DataGridTextColumn Header="TÉCNICO" Binding="{Binding Tecnico.Nombre}"
                                          SortMemberPath="Tecnico.Nombre" Width="*"
-                                         Foreground="{StaticResource TextoSuaveBrush}"/>
+                                         Foreground="{DynamicResource TextoSuaveBrush}"/>
                     <DataGridTemplateColumn Header="ESTADO" Width="*" SortMemberPath="Estado">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -101,7 +101,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="INGRESO"
                                          Binding="{Binding FechaIngreso, StringFormat=dd/MM/yyyy}"
-                                         Width="*" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                         Width="*" Foreground="{DynamicResource TextoSuaveBrush}"/>
 
                     <DataGridTemplateColumn Header="" Width="130" MinWidth="130">
                         <DataGridTemplateColumn.CellTemplate>
@@ -131,7 +131,7 @@
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="0,0,8,0" Click="PaginaAnterior_Click"/>
                 <TextBlock x:Name="TxtPagina" VerticalAlignment="Center" Margin="8,0"
-                           Foreground="{StaticResource TextoSuaveBrush}" FontSize="13"/>
+                           Foreground="{DynamicResource TextoSuaveBrush}" FontSize="13"/>
                 <Button x:Name="BtnPaginaSiguiente" Content="Siguiente ›"
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="8,0,0,0" Click="PaginaSiguiente_Click"/>

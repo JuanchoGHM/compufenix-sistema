@@ -11,6 +11,8 @@ public partial class App : Application
 
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
+        GestorTema.CargarPreferenciaGuardada();
+
         // Fuerza el formato de moneda y números de Costa Rica en toda la app
         var cultura = new System.Globalization.CultureInfo("es-CR");
         System.Threading.Thread.CurrentThread.CurrentCulture = cultura;

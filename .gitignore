@@ -430,3 +430,5 @@ FodyWeavers.xsd
 
 # Configuración local con contraseñas (no subir a GitHub)
 appsettings.local.json
+
+tema_usuario.txt

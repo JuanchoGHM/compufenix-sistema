@@ -15,29 +15,39 @@
         <!-- Panel izquierdo -->
         <local:PanelMarca Grid.Column="0"/>
 
-        <!-- Formulario -->
+        <!-- Formulario (siempre en modo claro, sin importar el tema elegido) -->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Width="360" Margin="24"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBlock Text="CONFIGURACIÓN INICIAL" Style="{StaticResource Marca}"/>
+                <TextBlock Text="CONFIGURACIÓN INICIAL" FontSize="12" FontWeight="Bold"
+                           Foreground="{StaticResource PrimarioBrush}"/>
                 <TextBlock Text="Crea tu cuenta de administrador"
-                           Style="{StaticResource Titulo}" Margin="0,6,0,0"
-                           TextWrapping="Wrap"/>
+                           FontSize="24" FontWeight="SemiBold" Foreground="#0F172A"
+                           Margin="0,6,0,0" TextWrapping="Wrap"/>
                 <TextBlock Text="Será el primer usuario del sistema y podrá crear a los demás."
-                           Style="{StaticResource Subtitulo}" Margin="0,6,0,28"/>
+                           FontSize="13" Foreground="#64748B" TextWrapping="Wrap"
+                           Margin="0,6,0,28"/>
 
-                <TextBlock Text="Nombre completo" Style="{StaticResource Etiqueta}"/>
-                <TextBox x:Name="TxtNombre" Margin="0,0,0,16"/>
+                <TextBlock Text="Nombre completo" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <TextBox x:Name="TxtNombre" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                         Margin="0,0,0,16"/>
 
-                <TextBlock Text="Correo" Style="{StaticResource Etiqueta}"/>
-                <TextBox x:Name="TxtCorreo" Margin="0,0,0,16"/>
+                <TextBlock Text="Correo" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <TextBox x:Name="TxtCorreo" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                         Margin="0,0,0,16"/>
 
-                <TextBlock Text="Contraseña (mínimo 6 caracteres)" Style="{StaticResource Etiqueta}"/>
-                <PasswordBox x:Name="TxtContrasena" Margin="0,0,0,16"/>
+                <TextBlock Text="Contraseña (mínimo 6 caracteres)" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <PasswordBox x:Name="TxtContrasena" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                             Margin="0,0,0,16"/>
 
-                <TextBlock Text="Repetir contraseña" Style="{StaticResource Etiqueta}"/>
-                <PasswordBox x:Name="TxtContrasena2" Margin="0,0,0,24"/>
+                <TextBlock Text="Repetir contraseña" FontSize="12" FontWeight="Medium"
+                           Foreground="#0F172A" Margin="0,0,0,6"/>
+                <PasswordBox x:Name="TxtContrasena2" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                             Margin="0,0,0,24"/>
 
                 <Button Content="Crear administrador" Click="Crear_Click"/>
             </StackPanel>

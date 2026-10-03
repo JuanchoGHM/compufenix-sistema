@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
         Width="520" SizeToContent="Height"
-        Background="{StaticResource FondoBrush}"
+        Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="Manual"
         ResizeMode="NoResize">
     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700">
-        <Border Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+        <Border Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1"
                 CornerRadius="16"
                 Margin="24"
                 Padding="32">
             <StackPanel>
                 <Border Width="52" Height="52" CornerRadius="26"
-                        Background="{StaticResource HoverSuaveBrush}"
+                        Background="{DynamicResource HoverSuaveBrush}"
                         HorizontalAlignment="Left" Margin="0,0,0,20">
                     <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE81E;"
                                FontSize="22" Foreground="{StaticResource PrimarioBrush}"
@@ -65,7 +65,7 @@
                 </Grid>
 
                 <TextBlock Text="Historial reciente" FontWeight="SemiBold"
-                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,10"/>
+                           Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,10"/>
                 <ItemsControl x:Name="ListaHistorial">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -79,10 +79,10 @@
                                              VerticalAlignment="Center"
                                              Fill="{Binding Color}"/>
                                     <TextBlock Text="{Binding Descripcion}" FontSize="13"
-                                               Foreground="{StaticResource TextoBrush}"/>
+                                               Foreground="{DynamicResource TextoBrush}"/>
                                 </StackPanel>
                                 <TextBlock Grid.Column="1" Text="{Binding FechaTexto}"
-                                           FontSize="12" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                           FontSize="12" Foreground="{DynamicResource TextoSuaveBrush}"/>
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

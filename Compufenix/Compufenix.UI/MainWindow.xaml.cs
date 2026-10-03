@@ -60,6 +60,8 @@ public partial class MainWindow : Window
 
         _monitorInactividad = new MonitorInactividad(this, TimeSpan.FromMinutes(10));
         _monitorInactividad.SesionExpirada += () => Dispatcher.Invoke(CerrarPorInactividad);
+
+        ActualizarBotonTema();
     }
 
     // ===== Navegación entre pantallas =====
@@ -117,12 +119,16 @@ public partial class MainWindow : Window
 
     private void TarjetaProductos_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        MostrarModulo(new InventarioView(), BtnInventario);
+        var vista = new InventarioView();
+        vista.DatosCambiaron += ActualizarBadgeStockBajo;
+        MostrarModulo(vista, BtnInventario);
     }
 
     private void TarjetaStockBajo_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        MostrarModulo(new InventarioView(soloStockBajo: true), BtnInventario);
+        var vista = new InventarioView(soloStockBajo: true);
+        vista.DatosCambiaron += ActualizarBadgeStockBajo;
+        MostrarModulo(vista, BtnInventario);
     }
 
     private void TarjetaTickets_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -142,7 +148,9 @@ public partial class MainWindow : Window
 
     private void Inventario_Click(object sender, RoutedEventArgs e)
     {
-        MostrarModulo(new InventarioView(), BtnInventario);
+        var vista = new InventarioView();
+        vista.DatosCambiaron += ActualizarBadgeStockBajo;
+        MostrarModulo(vista, BtnInventario);
     }
 
     private void Clientes_Click(object sender, RoutedEventArgs e)
@@ -209,6 +217,26 @@ public partial class MainWindow : Window
         catch
         {
             // Si falla, se deja el badge como estaba
+        }
+    }
+
+    private void AlternarTema_Click(object sender, RoutedEventArgs e)
+    {
+        GestorTema.Alternar();
+        ActualizarBotonTema();
+    }
+
+    private void ActualizarBotonTema()
+    {
+        if (GestorTema.EsOscuro)
+        {
+            IconoTema.Text = "\uE706"; // sol
+            TxtTema.Text = "Modo claro";
+        }
+        else
+        {
+            IconoTema.Text = "\uE708"; // luna
+            TxtTema.Text = "Modo oscuro";
         }
     }
 

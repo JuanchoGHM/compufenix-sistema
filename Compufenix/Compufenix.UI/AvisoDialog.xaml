@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
         Width="420" SizeToContent="Height" MaxHeight="700"
-        Background="{StaticResource FondoBrush}"
+        Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="Manual"
         ResizeMode="NoResize">
-    <Border Background="{StaticResource SuperficieBrush}"
-            BorderBrush="{StaticResource BordeBrush}"
+    <Border Background="{DynamicResource SuperficieBrush}"
+            BorderBrush="{DynamicResource BordeBrush}"
             BorderThickness="1"
             CornerRadius="16"
             Margin="24"
@@ -22,7 +22,7 @@
 
             <TextBlock x:Name="TxtTitulo" Text="Listo"
                        FontSize="19" FontWeight="SemiBold"
-                       Foreground="{StaticResource TextoBrush}"/>
+                       Foreground="{DynamicResource TextoBrush}"/>
             <TextBlock x:Name="TxtMensaje"
                        Style="{StaticResource Subtitulo}"
                        TextWrapping="Wrap" Margin="0,8,0,28"/>

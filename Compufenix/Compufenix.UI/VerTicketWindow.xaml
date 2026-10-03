@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
         Width="620" SizeToContent="Height" MaxHeight="700"
-        Background="{StaticResource FondoBrush}"
+        Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="Manual"
         ResizeMode="NoResize">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -16,15 +16,15 @@
                     <TextBlock x:Name="TxtSubtitulo" Style="{StaticResource Subtitulo}" Margin="0,4,0,0"/>
                 </StackPanel>
                 <Border x:Name="PildoraEstado" HorizontalAlignment="Right" VerticalAlignment="Top"
-                        CornerRadius="20" Padding="14,6" Background="{StaticResource HoverSuaveBrush}">
+                        CornerRadius="20" Padding="14,6" Background="{DynamicResource HoverSuaveBrush}">
                     <TextBlock x:Name="TxtEstado" FontSize="13" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}"/>
+                               Foreground="{DynamicResource TextoBrush}"/>
                 </Border>
             </Grid>
 
             <!-- ===== Datos del cliente y equipo ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,16">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -35,44 +35,44 @@
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="CLIENTE" Style="{StaticResource Marca}" FontSize="11"/>
                         <TextBlock x:Name="TxtCliente" FontSize="15" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextoBrush}" Margin="0,4,0,12"/>
+                                   Foreground="{DynamicResource TextoBrush}" Margin="0,4,0,12"/>
 
                         <TextBlock Text="EQUIPO" Style="{StaticResource Marca}" FontSize="11"/>
                         <TextBlock x:Name="TxtEquipo" FontSize="15" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextoBrush}" Margin="0,4,0,0"/>
+                                   Foreground="{DynamicResource TextoBrush}" Margin="0,4,0,0"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="TÉCNICO ASIGNADO" Style="{StaticResource Marca}" FontSize="11"/>
                         <TextBlock x:Name="TxtTecnico" FontSize="15" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextoBrush}" Margin="0,4,0,12"/>
+                                   Foreground="{DynamicResource TextoBrush}" Margin="0,4,0,12"/>
 
                         <TextBlock Text="FECHA DE INGRESO" Style="{StaticResource Marca}" FontSize="11"/>
                         <TextBlock x:Name="TxtFecha" FontSize="15" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextoBrush}" Margin="0,4,0,0"/>
+                                   Foreground="{DynamicResource TextoBrush}" Margin="0,4,0,0"/>
                     </StackPanel>
                 </Grid>
             </Border>
 
             <!-- ===== Diagnóstico ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="Diagnóstico" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,10"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,10"/>
                     <TextBlock x:Name="TxtDiagnostico" TextWrapping="Wrap"
-                               Foreground="{StaticResource TextoSuaveBrush}"/>
+                               Foreground="{DynamicResource TextoSuaveBrush}"/>
                 </StackPanel>
             </Border>
 
             <!-- ===== Historial de estados ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="Historial del ticket" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,16"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,16"/>
                     <ItemsControl x:Name="ListaHistorial">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -88,15 +88,15 @@
                                     <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,14,0">
                                         <Ellipse Width="10" Height="10" Fill="{StaticResource PrimarioBrush}"/>
                                         <Rectangle Width="2" Height="34"
-                                                   Fill="{StaticResource BordeBrush}"
+                                                   Fill="{DynamicResource BordeBrush}"
                                                    Visibility="{Binding LineaVisible}"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="1" Margin="0,0,0,12">
                                         <TextBlock Text="{Binding NombreEstado}" FontWeight="SemiBold"
-                                                   Foreground="{StaticResource TextoBrush}"/>
+                                                   Foreground="{DynamicResource TextoBrush}"/>
                                         <TextBlock Text="{Binding Detalle}" FontSize="12"
-                                                   Foreground="{StaticResource TextoSuaveBrush}"/>
+                                                   Foreground="{DynamicResource TextoSuaveBrush}"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -106,12 +106,12 @@
             </Border>
 
             <!-- ===== Repuestos usados ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,16">
                 <StackPanel>
                     <TextBlock Text="Repuestos utilizados" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,14"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,14"/>
                     <ItemsControl x:Name="ListaRepuestos">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -125,10 +125,10 @@
                                                 Background="{StaticResource PrimarioBrush}"
                                                 VerticalAlignment="Center" Margin="0,0,10,0"/>
                                         <TextBlock Text="{Binding Descripcion}" FontSize="13"
-                                                   Foreground="{StaticResource TextoBrush}"/>
+                                                   Foreground="{DynamicResource TextoBrush}"/>
                                     </StackPanel>
                                     <TextBlock Grid.Column="1" Text="{Binding FechaTexto}"
-                                               FontSize="12" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                               FontSize="12" Foreground="{DynamicResource TextoSuaveBrush}"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

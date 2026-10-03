@@ -8,30 +8,30 @@
                        Style="{StaticResource Subtitulo}" Margin="0,6,0,28"/>
 
             <!-- ===== Inventario ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,20">
                 <StackPanel>
                     <TextBlock Text="Inventario disponible" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,16"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,16"/>
 
                     <UniformGrid Columns="2" Margin="0,0,0,20">
                         <StackPanel Margin="0,0,12,0">
                             <TextBlock Text="Productos registrados"
                                        Style="{StaticResource Subtitulo}"/>
                             <TextBlock x:Name="TxtTotalProductos" FontSize="26" FontWeight="Bold"
-                                       Foreground="{StaticResource TextoBrush}"/>
+                                       Foreground="{DynamicResource TextoBrush}"/>
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Unidades totales en stock"
                                        Style="{StaticResource Subtitulo}"/>
                             <TextBlock x:Name="TxtTotalUnidades" FontSize="26" FontWeight="Bold"
-                                       Foreground="{StaticResource TextoBrush}"/>
+                                       Foreground="{DynamicResource TextoBrush}"/>
                         </StackPanel>
                     </UniformGrid>
 
                     <TextBlock Text="Productos con stock bajo" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,10"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,10"/>
                     <ItemsControl x:Name="ListaStockBajo">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -40,8 +40,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Nombre}" FontSize="13"/>
-                                    <TextBlock Grid.Column="1" FontSize="13" Foreground="#EF4444">
+                                    <TextBlock Grid.Column="0" Text="{Binding Nombre}" FontSize="13"
+                                               Foreground="{DynamicResource TextoBrush}"/>                                    <TextBlock Grid.Column="1" FontSize="13" Foreground="#EF4444">
                                         <Run Text="{Binding StockActual, Mode=OneWay}"/>
                                         <Run Text=" / mínimo "/>
                                         <Run Text="{Binding StockMinimo, Mode=OneWay}"/>
@@ -56,12 +56,12 @@
             </Border>
 
             <!-- ===== Tickets por estado ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24" Margin="0,0,0,20">
                 <StackPanel>
                     <TextBlock Text="Tickets por estado" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,16"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,16"/>
                     <ItemsControl x:Name="ListaEstados">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -70,11 +70,12 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding NombreEstado}" FontSize="13"/>
-                                    <Border Grid.Column="1" Background="{StaticResource HoverSuaveBrush}"
+                                    <TextBlock Grid.Column="0" Text="{Binding NombreEstado}" FontSize="13"
+                                               Foreground="{DynamicResource TextoBrush}"/>
+                                    <Border Grid.Column="1" Background="{DynamicResource HoverSuaveBrush}"
                                             CornerRadius="10" Padding="10,3">
                                         <TextBlock Text="{Binding Cantidad}" FontSize="12" FontWeight="SemiBold"
-                                                   Foreground="{StaticResource TextoBrush}"/>
+                                                   Foreground="{DynamicResource TextoBrush}"/>
                                     </Border>
                                 </Grid>
                             </DataTemplate>
@@ -86,12 +87,12 @@
             </Border>
 
             <!-- ===== Ingresos por período ===== -->
-            <Border Background="{StaticResource SuperficieBrush}"
-                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+            <Border Background="{DynamicResource SuperficieBrush}"
+                    BorderBrush="{DynamicResource BordeBrush}" BorderThickness="1"
                     CornerRadius="16" Padding="24">
                 <StackPanel>
                     <TextBlock Text="Ingresos por período" FontSize="16" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,16"/>
+                               Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,16"/>
 
                     <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>

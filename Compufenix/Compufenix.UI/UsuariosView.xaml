@@ -20,8 +20,8 @@
         </Grid>
 
         <Border Grid.Row="1"
-                Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+                Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1" CornerRadius="16" Padding="8,8,20,8">
             <Border.Effect>
                 <DropShadowEffect Color="#0F172A" BlurRadius="20"
@@ -61,7 +61,7 @@
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Text" Value="Activo"/>
-                                                <Setter Property="Foreground" Value="{StaticResource TextoSuaveBrush}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource TextoSuaveBrush}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Activo}" Value="False">
                                                         <Setter Property="Text" Value="Inactivo"/>
@@ -122,7 +122,7 @@
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="0,0,8,0" Click="PaginaAnterior_Click"/>
                 <TextBlock x:Name="TxtPagina" VerticalAlignment="Center" Margin="8,0"
-                           Foreground="{StaticResource TextoSuaveBrush}" FontSize="13"/>
+                           Foreground="{DynamicResource TextoSuaveBrush}" FontSize="13"/>
                 <Button x:Name="BtnPaginaSiguiente" Content="Siguiente ›"
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="8,0,0,0" Click="PaginaSiguiente_Click"/>

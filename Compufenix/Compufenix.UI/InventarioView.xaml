@@ -28,7 +28,7 @@
                      Padding="38,10"
                      TextChanged="TxtBuscar_TextChanged"/>
             <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
-                       Foreground="{StaticResource TextoSuaveBrush}"
+                       Foreground="{DynamicResource TextoSuaveBrush}"
                        FontSize="14"
                        HorizontalAlignment="Left" VerticalAlignment="Center"
                        Margin="14,0,0,0" IsHitTestVisible="False"/>
@@ -36,8 +36,8 @@
 
         <!-- Tabla de productos -->
         <Border Grid.Row="2"
-                Background="{StaticResource SuperficieBrush}"
-                BorderBrush="{StaticResource BordeBrush}"
+                Background="{DynamicResource SuperficieBrush}"
+                BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1" CornerRadius="16" Padding="8,8,20,8">
             <Border.Effect>
                 <DropShadowEffect Color="#0F172A" BlurRadius="20"
@@ -57,7 +57,7 @@
                                          Width="2*" FontWeight="SemiBold"/>
 
                     <DataGridTextColumn Header="CATEGORÍA" Binding="{Binding Categoria}"
-                                         Width="*" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                         Width="*" Foreground="{DynamicResource TextoSuaveBrush}"/>
 
                     <DataGridTextColumn Header="STOCK" Binding="{Binding StockActual}" Width="90"/>
                     <DataGridTextColumn Header="MÍNIMO" Binding="{Binding StockMinimo}" Width="90"/>
@@ -82,7 +82,7 @@
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Text" Value="Normal"/>
-                                                <Setter Property="Foreground" Value="{StaticResource TextoSuaveBrush}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource TextoSuaveBrush}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding EstadoAlerta}" Value="True">
                                                         <Setter Property="Text" Value="Stock bajo"/>
@@ -103,7 +103,7 @@
 
                     <DataGridTextColumn Header="INCORPORADO"
                                          Binding="{Binding FechaIncorporacion, StringFormat=dd/MM/yyyy}"
-                                         Width="120" Foreground="{StaticResource TextoSuaveBrush}"/>
+                                         Width="120" Foreground="{DynamicResource TextoSuaveBrush}"/>
 
                     <DataGridTemplateColumn Header="" Width="130" MinWidth="130">                        
                         <DataGridTemplateColumn.CellTemplate>
@@ -133,7 +133,7 @@
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="0,0,8,0" Click="PaginaAnterior_Click"/>
                 <TextBlock x:Name="TxtPagina" VerticalAlignment="Center" Margin="8,0"
-                           Foreground="{StaticResource TextoSuaveBrush}" FontSize="13"/>
+                           Foreground="{DynamicResource TextoSuaveBrush}" FontSize="13"/>
                 <Button x:Name="BtnPaginaSiguiente" Content="Siguiente ›"
                         Style="{StaticResource BotonSecundario}"
                         Padding="14,8" Margin="8,0,0,0" Click="PaginaSiguiente_Click"/>
