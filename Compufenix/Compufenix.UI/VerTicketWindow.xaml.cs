@@ -12,6 +12,12 @@ public partial class VerTicketWindow : Window
         public string Descripcion { get; set; } = string.Empty;
         public string FechaTexto { get; set; } = string.Empty;
     }
+    private class FilaHistorial
+    {
+        public string NombreEstado { get; set; } = string.Empty;
+        public string Detalle { get; set; } = string.Empty;
+        public Visibility LineaVisible { get; set; }
+    }
 
     public VerTicketWindow(int idTicket)
     {
@@ -36,6 +42,17 @@ public partial class VerTicketWindow : Window
         TxtDiagnostico.Text = string.IsNullOrWhiteSpace(ticket.Diagnostico)
             ? "Sin diagnóstico registrado."
             : ticket.Diagnostico;
+
+        var historial = servicio.ObtenerHistorial(idTicket);
+        var filasHistorial = historial.Select((h, indice) => new FilaHistorial
+        {
+            NombreEstado = Textos.Mostrar(h.Estado),
+            Detalle = $"{h.Fecha:dd/MM/yyyy HH:mm}" +
+                (h.Usuario != null ? $" · {h.Usuario.Nombre}" : ""),
+            LineaVisible = indice < historial.Count - 1 ? Visibility.Visible : Visibility.Collapsed
+        }).ToList();
+
+        ListaHistorial.ItemsSource = filasHistorial;
 
         var repuestos = servicio.ObtenerRepuestosUsados(idTicket);
         var filas = repuestos.Select(m => new FilaRepuesto

@@ -65,7 +65,7 @@ public partial class FichaTicketWindow : Window
         if (CmbEstado.SelectedItem is not EstadoTicket estado) return;
 
         using var db = Configuracion.CrearDb();
-        new ServicioTickets(db).CambiarEstado(_idTicket, estado);
+        new ServicioTickets(db).CambiarEstado(_idTicket, estado, Sesion.UsuarioActual?.IdUsuario);
 
         TxtEstadoGuardado.Visibility = Visibility.Visible;
 

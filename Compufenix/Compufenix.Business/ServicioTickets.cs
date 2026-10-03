@@ -2,6 +2,7 @@
 using Compufenix.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Compufenix.Business;
 
 public class ServicioTickets
@@ -44,17 +45,36 @@ public class ServicioTickets
 
         _db.Tickets.Add(ticket);
         _db.SaveChanges();
+
+        RegistrarHistorial(ticket.IdTicket, ticket.Estado, ticket.IdTecnico, ticket.FechaIngreso);
+    }
+
+    // Guarda una entrada en la línea de tiempo del ticket
+    private void RegistrarHistorial(int idTicket, EstadoTicket estado, int? idUsuario, DateTime? fecha = null)
+    {
+        _db.HistorialEstadosTicket.Add(new HistorialEstadoTicket
+        {
+            IdTicket = idTicket,
+            Estado = estado,
+            Fecha = fecha ?? DateTime.Now,
+            IdUsuario = idUsuario
+        });
+        _db.SaveChanges();
     }
 
 
     // Cambia el estado de un ticket
-    public void CambiarEstado(int idTicket, EstadoTicket nuevoEstado)
+    public void CambiarEstado(int idTicket, EstadoTicket nuevoEstado, int? idUsuarioQueCambia)
     {
         var ticket = _db.Tickets.Find(idTicket)
             ?? throw new InvalidOperationException("El ticket ya no existe.");
 
+        if (ticket.Estado == nuevoEstado) return; // no repetir el mismo estado en el historial
+
         ticket.Estado = nuevoEstado;
         _db.SaveChanges();
+
+        RegistrarHistorial(idTicket, nuevoEstado, idUsuarioQueCambia);
     }
 
     // Usa un repuesto en el ticket: descuenta el stock y suma el costo al ticket
@@ -121,12 +141,17 @@ public class ServicioTickets
         var ticket = _db.Tickets.Find(idTicket)
             ?? throw new InvalidOperationException("El ticket ya no existe.");
 
+        bool cambioEstado = ticket.Estado != estado;
+
         ticket.IdEquipo = idEquipo;
         ticket.IdTecnico = idTecnico;
         ticket.Estado = estado;
         ticket.FechaIngreso = fechaIngreso;
         ticket.Diagnostico = diagnostico;
         _db.SaveChanges();
+
+        if (cambioEstado)
+            RegistrarHistorial(idTicket, estado, idTecnico);
     }
 
     public void Eliminar(int idTicket)
@@ -141,5 +166,15 @@ public class ServicioTickets
 
         _db.Tickets.Remove(ticket);
         _db.SaveChanges();
+    }
+
+    // Historial de estados de un ticket, del más antiguo al más reciente
+    public List<HistorialEstadoTicket> ObtenerHistorial(int idTicket)
+    {
+        return _db.HistorialEstadosTicket
+            .Include(h => h.Usuario)
+            .Where(h => h.IdTicket == idTicket)
+            .OrderBy(h => h.Fecha)
+            .ToList();
     }
 }

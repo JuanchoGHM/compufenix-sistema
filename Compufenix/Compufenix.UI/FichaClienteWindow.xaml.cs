@@ -18,6 +18,7 @@ public partial class FichaClienteWindow : Window
     public FichaClienteWindow(Cliente cliente)
     {
         InitializeComponent();
+        this.CentrarEnPantalla();
         _cliente = cliente;
 
         TxtNombreCliente.Text = cliente.Nombre;

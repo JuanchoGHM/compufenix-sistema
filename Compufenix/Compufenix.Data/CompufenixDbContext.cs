@@ -18,11 +18,14 @@ public class CompufenixDbContext : DbContext
     public DbSet<Ticket> Tickets => Set<Ticket>();
     public DbSet<MovimientoInventario> MovimientosInventario => Set<MovimientoInventario>();
 
+    public DbSet<HistorialEstadoTicket> HistorialEstadosTicket => Set<HistorialEstadoTicket>();
+
     protected override void OnModelCreating(ModelBuilder mb)
     {
         // Los enums se guardan como texto, igual que los ENUM de MySQL
         mb.Entity<Usuario>().Property(u => u.Rol).HasConversion<string>();
         mb.Entity<Ticket>().Property(t => t.Estado).HasConversion<string>();
         mb.Entity<MovimientoInventario>().Property(m => m.Tipo).HasConversion<string>();
+        mb.Entity<HistorialEstadoTicket>().Property(h => h.Estado).HasConversion<string>();
     }
 }

@@ -2,11 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="COMPUFENIX"
-        Width="620" SizeToContent="Height"
+        Width="620" SizeToContent="Height" MaxHeight="700"
         Background="{StaticResource FondoBrush}"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="Manual"
         ResizeMode="NoResize">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="720">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Border Background="{StaticResource SuperficieBrush}"
                 BorderBrush="{StaticResource BordeBrush}"
                 BorderThickness="1"
