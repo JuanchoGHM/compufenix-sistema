@@ -1,0 +1,2 @@
+USE compufenix;
+SHOW TABLES;
