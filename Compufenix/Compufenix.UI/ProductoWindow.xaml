@@ -1,0 +1,77 @@
+﻿<Window x:Class="Compufenix.UI.ProductoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="480" SizeToContent="Height"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock x:Name="TxtIcono" FontFamily="Segoe MDL2 Assets" Text="&#xE710;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock x:Name="TxtTitulo" Text="Nuevo producto"
+                           Style="{StaticResource Titulo}"/>
+                <TextBlock Text="Completa los datos del producto o repuesto."
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <TextBlock Text="Nombre" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtNombre" Margin="0,0,0,16"/>
+
+                <TextBlock Text="Categoría" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtCategoria" Margin="0,0,0,16"/>
+
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Stock actual" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtStockActual"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Stock mínimo" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtStockMinimo"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Precio unitario" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtPrecio" Margin="0,0,0,12"/>
+
+                <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtError"
+                               Foreground="#DC2626" FontSize="12"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Grid Margin="0,12,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Cancelar"
+                            Style="{StaticResource BotonSecundario}"
+                            Click="Cancelar_Click"/>
+                    <Button Grid.Column="2" Content="Guardar"
+                            Click="Guardar_Click"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>
