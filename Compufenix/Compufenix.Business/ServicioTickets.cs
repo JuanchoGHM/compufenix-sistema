@@ -164,6 +164,10 @@ public class ServicioTickets
             throw new InvalidOperationException(
                 "No se puede eliminar: este ticket ya tiene repuestos utilizados registrados.");
 
+        // Primero se elimina su línea de tiempo, porque depende del ticket
+        var historial = _db.HistorialEstadosTicket.Where(h => h.IdTicket == idTicket);
+        _db.HistorialEstadosTicket.RemoveRange(historial);
+
         _db.Tickets.Remove(ticket);
         _db.SaveChanges();
     }

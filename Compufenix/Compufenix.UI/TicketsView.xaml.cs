@@ -124,7 +124,8 @@ public partial class TicketsView : UserControl
         }
         catch (Exception ex)
         {
-            AvisoDialog.Mostrar(Window.GetWindow(this), "No se pudo eliminar", ex.Message, esError: true);
+            var mensaje = ex.InnerException?.Message ?? ex.Message;
+            AvisoDialog.Mostrar(Window.GetWindow(this), "No se pudo eliminar", mensaje, esError: true);
         }
     }
 
