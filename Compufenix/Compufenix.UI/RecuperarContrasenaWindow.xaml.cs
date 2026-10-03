@@ -125,6 +125,7 @@ public partial class RecuperarContrasenaWindow : Window
         PanelError1.Visibility = Visibility.Visible;
     }
 
+
     private void MostrarError2(string mensaje)
     {
         TxtError2.Text = mensaje;
