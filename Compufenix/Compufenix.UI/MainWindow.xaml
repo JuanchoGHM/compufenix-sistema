@@ -48,22 +48,26 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnTickets" Click="Tickets_Click" Style="{StaticResource BotonMenuOscuro}">
+                    <Button x:Name="BtnTickets" Click="Tickets_Click"
+                            Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
                             <TextBlock Text="Tickets" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    
-                    <Button x:Name="BtnClientes" Click="Clientes_Click" Style="{StaticResource BotonMenuOscuro}">                        <StackPanel Orientation="Horizontal">
+
+                    <Button x:Name="BtnClientes" Click="Clientes_Click"
+                            Style="{StaticResource BotonMenuOscuro}">
+                        <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
                             <TextBlock Text="Clientes" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnReportes" Click="Reportes_Click" Style="{StaticResource BotonMenuOscuro}">
+                    <Button x:Name="BtnReportes" Click="Reportes_Click"
+                            Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8A5;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
@@ -71,7 +75,8 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnUsuarios" Click="Usuarios_Click" Style="{StaticResource BotonMenuOscuro}">
+                    <Button x:Name="BtnUsuarios" Click="Usuarios_Click"
+                            Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
@@ -236,6 +241,118 @@
                                        Foreground="{StaticResource TextoSuaveBrush}"
                                        VerticalAlignment="Center" Margin="14,0,0,0"/>
                         </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== Tickets más antiguos sin resolver ===== -->
+                <Border Background="{StaticResource SuperficieBrush}"
+                        BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+                        CornerRadius="16" Padding="24" Margin="0,16,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Tickets más antiguos sin resolver" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextoBrush}" Margin="0,0,0,16"/>
+                        <ItemsControl x:Name="ListaTicketsAntiguos">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource HoverSuaveBrush}"
+                                            CornerRadius="10" Padding="14,12" Margin="0,0,0,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock FontWeight="SemiBold"
+                                                           Foreground="{StaticResource TextoBrush}">
+                                                    <Run Text="{Binding Cliente, Mode=OneWay}"/>
+                                                    <Run Text=" · "/>
+                                                    <Run Text="{Binding Equipo, Mode=OneWay}"/>
+                                                </TextBlock>
+                                                <TextBlock Text="{Binding NombreEstado}" FontSize="12"
+                                                           Foreground="{StaticResource TextoSuaveBrush}"/>
+                                            </StackPanel>
+                                            <Border Grid.Column="1" Background="#FEE2E2"
+                                                    CornerRadius="10" Padding="10,4">
+                                                <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="#991B1B">
+                                                    <Run Text="{Binding DiasAbierto, Mode=OneWay}"/>
+                                                    <Run Text=" días"/>
+                                                </TextBlock>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock x:Name="TxtSinAntiguos" Text="No hay tickets abiertos pendientes."
+                                   Style="{StaticResource Subtitulo}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== Top clientes con más tickets ===== -->
+                <Border Background="{StaticResource SuperficieBrush}"
+                        BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+                        CornerRadius="16" Padding="24" Margin="0,16,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Clientes con más tickets" FontSize="16" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextoBrush}" Margin="0,0,0,20"/>
+                        <ItemsControl x:Name="ListaTopClientes">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,14">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="140"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Cliente}" FontSize="13"
+                                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                        <Border Grid.Column="1" Height="18" CornerRadius="6"
+                                                Background="{StaticResource GradTeal}"
+                                                Width="{Binding AnchoBarra}"
+                                                HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Cantidad}" FontSize="13"
+                                                   FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock x:Name="TxtSinTopClientes" Text="Todavía no hay tickets registrados."
+                               Style="{StaticResource Subtitulo}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== Tickets atendidos por mes ===== -->
+                <Border Background="{StaticResource SuperficieBrush}"
+                    BorderBrush="{StaticResource BordeBrush}" BorderThickness="1"
+                    CornerRadius="16" Padding="24" Margin="0,16,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Tickets atendidos por mes" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,20"/>
+                        <ItemsControl x:Name="ListaTicketsPorMes">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Cantidad}" FontSize="12" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource TextoBrush}" Margin="0,0,0,4"/>
+                                        <Grid Height="120" VerticalAlignment="Bottom">
+                                            <Border Width="28" Height="{Binding AlturaBarra}"
+                                                VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                                CornerRadius="6,6,0,0"
+                                                Background="{StaticResource GradIndigo}"/>
+                                        </Grid>
+                                        <TextBlock Text="{Binding Mes}" FontSize="11" Margin="0,8,0,0"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource TextoSuaveBrush}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </Border>
             </StackPanel>
