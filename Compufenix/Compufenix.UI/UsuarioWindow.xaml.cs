@@ -6,16 +6,35 @@ namespace Compufenix.UI;
 
 public partial class UsuarioWindow : Window
 {
-    public UsuarioWindow()
+    private readonly Usuario? _usuarioExistente;
+
+    // Sin parámetros: usuario nuevo. Con un usuario: modo edición.
+    public UsuarioWindow(Usuario? usuario = null)
     {
         InitializeComponent();
         this.CentrarEnPantalla();
 
+        _usuarioExistente = usuario;
         CmbRol.ItemsSource = Enum.GetValues<RolUsuario>();
-        CmbRol.SelectedItem = RolUsuario.Tecnico;
+
+        if (usuario != null)
+        {
+            TxtTitulo.Text = "Editar usuario";
+            TxtSubtitulo.Text = "Actualiza los datos del usuario.";
+            TxtIcono.Text = "\uE70F";
+            TxtNombre.Text = usuario.Nombre;
+            TxtCorreo.Text = usuario.Correo;
+            CmbRol.SelectedItem = usuario.Rol;
+            TxtEtiquetaContrasena.Text = "Nueva contraseña (déjala vacía para no cambiarla)";
+            BtnGuardar.Content = "Guardar cambios";
+        }
+        else
+        {
+            CmbRol.SelectedItem = RolUsuario.Tecnico;
+        }
     }
 
-    private void Crear_Click(object sender, RoutedEventArgs e)
+    private void Guardar_Click(object sender, RoutedEventArgs e)
     {
         PanelError.Visibility = Visibility.Collapsed;
 
@@ -28,8 +47,20 @@ public partial class UsuarioWindow : Window
         try
         {
             using var db = Configuracion.CrearDb();
-            new ServicioUsuarios(db).CrearUsuario(
-                TxtNombre.Text, TxtCorreo.Text, TxtContrasena.Password, rol);
+            var servicio = new ServicioUsuarios(db);
+
+            if (_usuarioExistente == null)
+            {
+                servicio.CrearUsuario(TxtNombre.Text, TxtCorreo.Text, TxtContrasena.Password, rol);
+            }
+            else
+            {
+                string? nuevaContrasena = string.IsNullOrEmpty(TxtContrasena.Password)
+                    ? null
+                    : TxtContrasena.Password;
+
+                servicio.Editar(_usuarioExistente.IdUsuario, TxtNombre.Text, TxtCorreo.Text, rol, nuevaContrasena);
+            }
 
             DialogResult = true;
         }

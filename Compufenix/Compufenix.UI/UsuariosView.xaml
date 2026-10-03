@@ -95,6 +95,22 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="" Width="90" MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="&#xE70F;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28"
+                                            ToolTip="Editar" Click="Editar_Click"/>
+                                    <Button Content="&#xE74D;" Style="{StaticResource BotonIcono}"
+                                            Width="28" Height="28"
+                                            Foreground="#DC2626" Margin="2,0,0,0"
+                                            ToolTip="Eliminar" Click="Eliminar_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

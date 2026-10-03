@@ -1,4 +1,5 @@
-﻿using Compufenix.Data;
+﻿using System.Text.RegularExpressions;
+using Compufenix.Data;
 using Compufenix.Models;
 
 namespace Compufenix.Business;
@@ -11,6 +12,13 @@ public class ServicioUsuarios
     {
         _db = db;
     }
+
+    // Revisa que el texto tenga la forma básica de un correo: algo@algo.algo
+    private static bool EsCorreoValido(string correo)
+    {
+        return Regex.IsMatch(correo, @"^[^\s@]+@[^\s@]+\.[^\s@]+$");
+    }
+
 
     // ¿Hay al menos un usuario registrado?
     public bool ExisteAlgunUsuario()
@@ -26,6 +34,9 @@ public class ServicioUsuarios
 
         if (string.IsNullOrWhiteSpace(correo))
             throw new ArgumentException("El correo es obligatorio.");
+
+        if (!EsCorreoValido(correo))
+            throw new ArgumentException("El correo no tiene un formato válido (ejemplo: nombre@dominio.com).");
 
         if (string.IsNullOrEmpty(contrasena) || contrasena.Length < 6)
             throw new ArgumentException("La contraseña debe tener al menos 6 caracteres.");
@@ -80,5 +91,66 @@ public class ServicioUsuarios
         usuario.Activo = activo;
         _db.SaveChanges();
     }
+
+    // Actualiza nombre, correo y rol; la contraseña solo se cambia si se envía una nueva
+    public void Editar(int idUsuario, string nombre, string correo, RolUsuario rol, string? nuevaContrasena)
+    {
+        if (string.IsNullOrWhiteSpace(nombre))
+            throw new ArgumentException("El nombre es obligatorio.");
+
+        if (string.IsNullOrWhiteSpace(correo))
+            throw new ArgumentException("El correo es obligatorio.");
+
+        if (!EsCorreoValido(correo))
+            throw new ArgumentException("El correo no tiene un formato válido (ejemplo: nombre@dominio.com).");
+
+        correo = correo.Trim();
+
+        var usuario = _db.Usuarios.Find(idUsuario)
+            ?? throw new InvalidOperationException("El usuario ya no existe.");
+
+        if (_db.Usuarios.Any(u => u.Correo == correo && u.IdUsuario != idUsuario))
+            throw new InvalidOperationException("Ya existe otro usuario con ese correo.");
+
+        usuario.Nombre = nombre.Trim();
+        usuario.Correo = correo;
+        usuario.Rol = rol;
+
+        if (!string.IsNullOrEmpty(nuevaContrasena))
+        {
+            if (nuevaContrasena.Length < 6)
+                throw new ArgumentException("La nueva contraseña debe tener al menos 6 caracteres.");
+
+            usuario.ContrasenaHash = BCrypt.Net.BCrypt.HashPassword(nuevaContrasena);
+        }
+
+        _db.SaveChanges();
+    }
+
+    // Elimina un usuario, con las mismas protecciones de seguridad del sistema
+    public void Eliminar(int idUsuario, int idUsuarioActual)
+    {
+        if (idUsuario == idUsuarioActual)
+            throw new InvalidOperationException("No puedes eliminar tu propio usuario mientras tienes la sesión abierta.");
+
+        var usuario = _db.Usuarios.Find(idUsuario)
+            ?? throw new InvalidOperationException("El usuario ya no existe.");
+
+        bool tieneTickets = _db.Tickets.Any(t => t.IdTecnico == idUsuario);
+        if (tieneTickets)
+            throw new InvalidOperationException(
+                "No se puede eliminar: este usuario tiene tickets asignados. Puedes desactivarlo en su lugar.");
+
+        if (usuario.Rol == RolUsuario.Administrador)
+        {
+            int totalAdmins = _db.Usuarios.Count(u => u.Rol == RolUsuario.Administrador);
+            if (totalAdmins <= 1)
+                throw new InvalidOperationException("No se puede eliminar: debe existir al menos un administrador.");
+        }
+
+        _db.Usuarios.Remove(usuario);
+        _db.SaveChanges();
+    }
+
 
 }
