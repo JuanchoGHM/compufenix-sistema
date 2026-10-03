@@ -38,4 +38,13 @@ public partial class TicketsView : UserControl
             CargarTickets(TxtBuscar.Text);
         }
     }
+
+    private void TablaTickets_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (TablaTickets.SelectedItem is not Compufenix.Models.Ticket ticket) return;
+
+        var ventana = new FichaTicketWindow(ticket.IdTicket) { Owner = Window.GetWindow(this) };
+        ventana.ShowDialog();
+        CargarTickets(TxtBuscar.Text);
+    }
 }

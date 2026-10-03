@@ -1,0 +1,124 @@
+﻿<Window x:Class="Compufenix.UI.FichaTicketWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="640" SizeToContent="Height"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="760">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock x:Name="TxtTitulo" Style="{StaticResource Titulo}"/>
+                <TextBlock x:Name="TxtSubtitulo"
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <!-- Estado -->
+                <TextBlock Text="Estado del ticket" Style="{StaticResource Etiqueta}"/>
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="CmbEstado" Grid.Column="0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource ConvertidorEstado}}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>                    <Button Grid.Column="2" Content="Guardar estado"
+                            Style="{StaticResource BotonSecundario}"
+                            Click="GuardarEstado_Click"/>
+                </Grid>
+
+                <TextBlock x:Name="TxtEstadoGuardado" Text="✓ Estado guardado correctamente"
+                           Foreground="#16A34A" FontSize="12" Margin="0,10,0,10"
+                           Visibility="Collapsed"/>
+                
+
+                <Border Height="1" Background="{StaticResource BordeBrush}" Margin="0,0,0,20"/>
+
+                <!-- Repuestos -->
+                <TextBlock Text="Usar un repuesto" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Producto" Style="{StaticResource Etiqueta}"/>
+                        <ComboBox x:Name="CmbProducto" DisplayMemberPath="Descripcion"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Cantidad" Style="{StaticResource Etiqueta}"/>
+                        <TextBox x:Name="TxtCantidad"/>
+                    </StackPanel>
+                </Grid>
+
+                <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtError"
+                               Foreground="#DC2626" FontSize="12"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Button Content="+ Usar repuesto" HorizontalAlignment="Left"
+                        Click="UsarRepuesto_Click" Margin="0,0,0,24"/>
+
+                <!-- Historial de repuestos -->
+                <TextBlock Text="Repuestos utilizados" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,12"/>
+
+                <ItemsControl x:Name="ListaRepuestos">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Descripcion}"
+                                           FontSize="13" Foreground="{StaticResource TextoBrush}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding FechaTexto}"
+                                           FontSize="12" Foreground="{StaticResource TextoSuaveBrush}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="TxtSinRepuestos" Text="Todavía no se han usado repuestos en este ticket."
+                           Style="{StaticResource Subtitulo}" Margin="0,0,0,20"/>
+
+                <Border Height="1" Background="{StaticResource BordeBrush}" Margin="0,0,0,16"/>
+
+                <Grid>
+                    <TextBlock Text="Costo total" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextoBrush}"/>
+                    <TextBlock x:Name="TxtCostoTotal" FontWeight="Bold" FontSize="18"
+                               Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Button Content="Cerrar" Style="{StaticResource BotonSecundario}"
+                        HorizontalAlignment="Right" Margin="0,24,0,0"
+                        Click="Cerrar_Click"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>
