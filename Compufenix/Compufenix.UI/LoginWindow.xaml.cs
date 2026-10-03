@@ -10,6 +10,18 @@ public partial class LoginWindow : Window
     public LoginWindow()
     {
         InitializeComponent();
+        this.SizeChanged += (s, e) => AjustarResponsive();
+        this.Loaded += (s, e) => AjustarResponsive();
+        this.ContentRendered += (s, e) => AjustarResponsive();
+        AjustarResponsive();
+    }
+
+    private void AjustarResponsive()
+    {
+        bool anchoPequeno = ActualWidth < 850;
+
+        ColPanelMarca.Width = anchoPequeno ? new GridLength(0) : new GridLength(1.1, GridUnitType.Star);
+        PanelMarcaLogin.Visibility = anchoPequeno ? Visibility.Collapsed : Visibility.Visible;
     }
 
     private void Entrar_Click(object sender, RoutedEventArgs e)

@@ -59,13 +59,14 @@
                       RowHeight="56"
                       Background="Transparent"
                       BorderThickness="0"
-                      CanUserSortColumns="True">
+                      CanUserSortColumns="True"
+                      HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.CanContentScroll="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="NOMBRE" Binding="{Binding Nombre}"
-                                         Width="2*" FontWeight="SemiBold"/>
-
+                                         Width="2*" MinWidth="160" FontWeight="SemiBold"/>
                     <DataGridTextColumn Header="CATEGORÍA" Binding="{Binding Categoria}"
-                                         Width="*" Foreground="{DynamicResource TextoSuaveBrush}"/>
+                                         Width="*" MinWidth="110" Foreground="{DynamicResource TextoSuaveBrush}"/>>
 
                     <DataGridTextColumn Header="STOCK" Binding="{Binding StockActual}" Width="90"/>
                     <DataGridTextColumn Header="MÍNIMO" Binding="{Binding StockMinimo}" Width="90"/>

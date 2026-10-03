@@ -4,16 +4,16 @@
         xmlns:local="clr-namespace:Compufenix.UI"
         Title="COMPUFENIX"
         WindowState="Maximized"
-        MinWidth="900" MinHeight="680"
+        MinWidth="480" MinHeight="680"
         Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.1*"/>
+            <ColumnDefinition x:Name="ColPanelMarca" Width="1.1*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Panel izquierdo -->
-        <local:PanelMarca Grid.Column="0"/>
+        <!-- Panel izquierdo (se oculta en pantallas angostas) -->
+        <local:PanelMarca x:Name="PanelMarcaLogin" Grid.Column="0"/>
 
         <!-- Formulario (siempre en modo claro, sin importar el tema elegido) -->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">

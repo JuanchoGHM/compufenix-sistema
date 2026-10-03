@@ -62,6 +62,9 @@ public partial class MainWindow : Window
         _monitorInactividad.SesionExpirada += () => Dispatcher.Invoke(CerrarPorInactividad);
 
         ActualizarBotonTema();
+
+        this.SizeChanged += (s, e) => AjustarResponsive();
+        AjustarResponsive();
     }
 
     // ===== Navegación entre pantallas =====
@@ -238,6 +241,60 @@ public partial class MainWindow : Window
             IconoTema.Text = "\uE708"; // luna
             TxtTema.Text = "Modo oscuro";
         }
+    }
+
+
+    private bool _sidebarColapsada;
+
+    private void AjustarResponsive()
+    {
+        bool debeColapsar = ActualWidth < 1100;
+
+        if (debeColapsar == _sidebarColapsada) return; // ya está en el estado correcto
+        _sidebarColapsada = debeColapsar;
+
+        ColSidebar.Width = new GridLength(debeColapsar ? 72 : 260);
+
+        var visibilidadTexto = debeColapsar ? Visibility.Collapsed : Visibility.Visible;
+        var paddingBoton = debeColapsar ? new Thickness(0, 11, 0, 11) : new Thickness(14, 11, 14, 11);
+        var alineacionBoton = debeColapsar ? HorizontalAlignment.Center : HorizontalAlignment.Stretch;
+
+        foreach (var boton in new[] { BtnInicio, BtnInventario, BtnTickets, BtnClientes, BtnReportes, BtnUsuarios })
+        {
+            boton.Padding = paddingBoton;
+            boton.HorizontalContentAlignment = alineacionBoton;
+        }
+
+        // El panel lateral necesita menos margen cuando está colapsado,
+        // o no le queda espacio real a ningún contenido
+        PanelLateral.Margin = debeColapsar
+            ? new Thickness(8, 28, 8, 20)
+            : new Thickness(20, 28, 20, 20);
+
+        // Los botones de abajo (tema y cerrar sesión) también deben achicar su padding
+        var paddingBotonInferior = debeColapsar ? new Thickness(0, 10, 0, 10) : new Thickness(14, 10, 14, 10);
+        BtnTema.Padding = paddingBotonInferior;
+        BtnCerrarSesion.Padding = paddingBotonInferior;
+
+        TxtLogoTexto.Visibility = visibilidadTexto;
+        TxtLabelInicio.Visibility = visibilidadTexto;
+        TxtLabelInventario.Visibility = visibilidadTexto;
+        TxtLabelTickets.Visibility = visibilidadTexto;
+        TxtLabelClientes.Visibility = visibilidadTexto;
+        TxtLabelReportes.Visibility = visibilidadTexto;
+        TxtLabelUsuarios.Visibility = visibilidadTexto;
+        TxtNombreUsuario.Visibility = visibilidadTexto;
+        TxtRolUsuario.Visibility = visibilidadTexto;
+        TxtTema.Visibility = visibilidadTexto;
+        TxtLabelCerrarSesion.Visibility = visibilidadTexto;
+
+        int columnasTarjetas = ActualWidth switch
+        {
+            < 800 => 1,
+            < 1300 => 2,
+            _ => 4
+        };
+        GridTarjetas.Columns = columnasTarjetas;
     }
 
     private void CargarInicioExtra()
