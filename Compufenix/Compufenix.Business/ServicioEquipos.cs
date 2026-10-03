@@ -1,5 +1,6 @@
 ﻿using Compufenix.Data;
 using Compufenix.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Compufenix.Business;
 
@@ -18,6 +19,16 @@ public class ServicioEquipos
         return _db.Equipos
             .Where(e => e.IdCliente == idCliente)
             .OrderByDescending(e => e.IdEquipo)
+            .ToList();
+    }
+
+
+    // Todos los equipos con su cliente ya cargado (para elegir uno al crear un ticket)
+    public List<Equipo> ObtenerTodosConCliente()
+    {
+        return _db.Equipos
+            .Include(e => e.Cliente)
+            .OrderBy(e => e.Cliente!.Nombre)
             .ToList();
     }
 

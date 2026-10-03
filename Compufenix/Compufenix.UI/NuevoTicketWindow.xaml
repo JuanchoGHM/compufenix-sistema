@@ -1,0 +1,63 @@
+﻿<Window x:Class="Compufenix.UI.NuevoTicketWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="500" SizeToContent="Height"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="Nuevo ticket de servicio" Style="{StaticResource Titulo}"/>
+                <TextBlock Text="Selecciona el equipo y describe el motivo de la visita."
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <TextBlock Text="Equipo" Style="{StaticResource Etiqueta}"/>
+                <ComboBox x:Name="CmbEquipo" Margin="0,0,0,16"
+                          DisplayMemberPath="Descripcion"/>
+
+                <TextBlock Text="Técnico asignado (opcional)" Style="{StaticResource Etiqueta}"/>
+                <ComboBox x:Name="CmbTecnico" Margin="0,0,0,16"
+                          DisplayMemberPath="Nombre"/>
+
+                <TextBlock Text="Diagnóstico inicial" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtDiagnostico" Margin="0,0,0,12"
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="80"/>
+
+                <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtError"
+                               Foreground="#DC2626" FontSize="12"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Grid Margin="0,12,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Cancelar"
+                            Style="{StaticResource BotonSecundario}"
+                            Click="Cancelar_Click"/>
+                    <Button Grid.Column="2" Content="Crear ticket"
+                            Click="Crear_Click"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>

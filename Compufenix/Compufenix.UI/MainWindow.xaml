@@ -48,7 +48,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnTickets" Style="{StaticResource BotonMenuOscuro}" IsEnabled="False">
+                    <Button x:Name="BtnTickets" Click="Tickets_Click" Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>

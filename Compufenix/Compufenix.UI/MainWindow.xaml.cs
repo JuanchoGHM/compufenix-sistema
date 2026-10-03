@@ -87,6 +87,11 @@ public partial class MainWindow : Window
         MostrarModulo(new ClientesView(), BtnClientes);
     }
 
+    private void Tickets_Click(object sender, RoutedEventArgs e)
+    {
+        MostrarModulo(new TicketsView(), BtnTickets);
+    }
+
 
     // ===== Resumen del Inicio =====
 
