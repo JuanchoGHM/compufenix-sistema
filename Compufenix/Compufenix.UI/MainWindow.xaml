@@ -116,7 +116,7 @@
                 <!-- Tarjetas de colores -->
                 <UniformGrid Columns="4" Margin="-8,0,-8,0">
 
-                    <Border Background="{StaticResource GradIndigo}"
+                    <Border x:Name="TarjetaProductos" Style="{StaticResource TarjetaClicable}" MouseLeftButtonDown="TarjetaProductos_Click" Background="{StaticResource GradIndigo}"                            
                             CornerRadius="16" Padding="22" Margin="8">
                         <Border.Effect>
                             <DropShadowEffect Color="#2563EB" BlurRadius="24"
@@ -135,8 +135,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{StaticResource GradAmber}"
-                            CornerRadius="16" Padding="22" Margin="8">
+                    <Border x:Name="TarjetaStockBajo" Style="{StaticResource TarjetaClicable}" MouseLeftButtonDown="TarjetaStockBajo_Click" Background="{StaticResource GradAmber}"                            CornerRadius="16" Padding="22" Margin="8">
                         <Border.Effect>
                             <DropShadowEffect Color="#D97706" BlurRadius="24"
                                               ShadowDepth="8" Direction="270" Opacity="0.3"/>
@@ -154,8 +153,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{StaticResource GradTeal}"
-                            CornerRadius="16" Padding="22" Margin="8">
+                    <Border x:Name="TarjetaTickets" Style="{StaticResource TarjetaClicable}" MouseLeftButtonDown="TarjetaTickets_Click" Background="{StaticResource GradTeal}"                            CornerRadius="16" Padding="22" Margin="8">
                         <Border.Effect>
                             <DropShadowEffect Color="#EA580C" BlurRadius="24"
                                               ShadowDepth="8" Direction="270" Opacity="0.3"/>
@@ -173,7 +171,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{StaticResource GradViolet}"
+                    <Border x:Name="TarjetaClientes" Style="{StaticResource TarjetaClicable}" MouseLeftButtonDown="TarjetaClientes_Click" Background="{StaticResource GradViolet}"                            
                             CornerRadius="16" Padding="22" Margin="8">
                         <Border.Effect>
                             <DropShadowEffect Color="#1E3A8A" BlurRadius="24"

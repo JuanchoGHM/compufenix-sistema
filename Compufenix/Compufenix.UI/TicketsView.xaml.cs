@@ -9,18 +9,26 @@ public partial class TicketsView : UserControl
 {
     private List<Ticket> _ticketsActuales = new();
 
-    public TicketsView()
+    private readonly bool _soloAbiertos;
+
+    public TicketsView(bool soloAbiertos = false)
     {
         InitializeComponent();
+        _soloAbiertos = soloAbiertos;
         CargarTickets();
     }
-
     private void CargarTickets(string? texto = null)
     {
         try
         {
             using var db = Configuracion.CrearDb();
-            _ticketsActuales = new ServicioTickets(db).Buscar(texto);
+            var tickets = new ServicioTickets(db).Buscar(texto);
+
+            if (_soloAbiertos)
+                tickets = tickets.Where(t => t.Estado != EstadoTicket.Entregado
+                                          && t.Estado != EstadoTicket.Cancelado).ToList();
+
+            _ticketsActuales = tickets;
             TablaTickets.ItemsSource = _ticketsActuales;
         }
         catch

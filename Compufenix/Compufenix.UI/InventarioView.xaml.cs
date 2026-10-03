@@ -7,9 +7,12 @@ namespace Compufenix.UI;
 
 public partial class InventarioView : UserControl
 {
-    public InventarioView()
+    private readonly bool _soloStockBajo;
+
+    public InventarioView(bool soloStockBajo = false)
     {
         InitializeComponent();
+        _soloStockBajo = soloStockBajo;
         CargarProductos();
     }
 
@@ -19,7 +22,12 @@ public partial class InventarioView : UserControl
         {
             using var db = Configuracion.CrearDb();
             var servicio = new ServicioInventario(db);
-            TablaProductos.ItemsSource = servicio.Buscar(texto);
+            var productos = servicio.Buscar(texto);
+
+            if (_soloStockBajo)
+                productos = productos.Where(p => p.EstadoAlerta).ToList();
+
+            TablaProductos.ItemsSource = productos;
         }
         catch
         {

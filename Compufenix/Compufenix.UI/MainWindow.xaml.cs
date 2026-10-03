@@ -70,6 +70,7 @@ public partial class MainWindow : Window
         VistaInicio.Visibility = Visibility.Visible;
         MarcarActivo(BtnInicio);
         CargarResumen(); // refresca los números
+        AnimarEntrada(VistaInicio);
     }
 
     private void MostrarModulo(UserControl vista, Button boton)
@@ -78,6 +79,15 @@ public partial class MainWindow : Window
         VistaModulo.Content = vista;
         VistaModulo.Visibility = Visibility.Visible;
         MarcarActivo(boton);
+        AnimarEntrada(VistaModulo);
+    }
+
+    // Aparición suave de la pantalla (fundido de 0 a 1 en 200 milisegundos)
+    private void AnimarEntrada(UIElement elemento)
+    {
+        elemento.Opacity = 0;
+        var animacion = new System.Windows.Media.Animation.DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+        elemento.BeginAnimation(UIElement.OpacityProperty, animacion);
     }
 
     // Resalta el botón de la sección en la que estás
@@ -97,6 +107,29 @@ public partial class MainWindow : Window
                 ? Brushes.White
                 : new SolidColorBrush(Color.FromRgb(0xBF, 0xDB, 0xFE));
         }
+    }
+
+
+    // ===== Tarjetas del Inicio: navegación rápida =====
+
+    private void TarjetaProductos_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        MostrarModulo(new InventarioView(), BtnInventario);
+    }
+
+    private void TarjetaStockBajo_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        MostrarModulo(new InventarioView(soloStockBajo: true), BtnInventario);
+    }
+
+    private void TarjetaTickets_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        MostrarModulo(new TicketsView(soloAbiertos: true), BtnTickets);
+    }
+
+    private void TarjetaClientes_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        MostrarModulo(new ClientesView(), BtnClientes);
     }
 
     private void Inicio_Click(object sender, RoutedEventArgs e)
