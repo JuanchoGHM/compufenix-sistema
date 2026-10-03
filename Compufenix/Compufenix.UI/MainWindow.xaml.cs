@@ -12,6 +12,7 @@ public partial class MainWindow : Window
 
     private class FilaTicketAntiguoMostrar
     {
+        public int IdTicket { get; set; }
         public string Cliente { get; set; } = string.Empty;
         public string Equipo { get; set; } = string.Empty;
         public string NombreEstado { get; set; } = string.Empty;
@@ -70,6 +71,7 @@ public partial class MainWindow : Window
         VistaInicio.Visibility = Visibility.Visible;
         MarcarActivo(BtnInicio);
         CargarResumen(); // refresca los números
+        ActualizarBadgeStockBajo();
         AnimarEntrada(VistaInicio);
     }
 
@@ -80,6 +82,7 @@ public partial class MainWindow : Window
         VistaModulo.Visibility = Visibility.Visible;
         MarcarActivo(boton);
         AnimarEntrada(VistaModulo);
+        ActualizarBadgeStockBajo(); // se actualiza aunque no estés viendo el Inicio
     }
 
     // Aparición suave de la pantalla (fundido de 0 a 1 en 200 milisegundos)
@@ -184,6 +187,31 @@ public partial class MainWindow : Window
         }
     }
 
+
+    // Se puede llamar aunque el Inicio no esté visible: actualiza solo el punto rojo del menú
+    private void ActualizarBadgeStockBajo()
+    {
+        try
+        {
+            using var db = Configuracion.CrearDb();
+            var resumen = new ServicioResumen(db).Obtener();
+
+            if (resumen.StockBajo > 0)
+            {
+                BadgeStockBajo.Visibility = Visibility.Visible;
+                TxtBadgeStockBajo.Text = resumen.StockBajo.ToString();
+            }
+            else
+            {
+                BadgeStockBajo.Visibility = Visibility.Collapsed;
+            }
+        }
+        catch
+        {
+            // Si falla, se deja el badge como estaba
+        }
+    }
+
     private void CargarInicioExtra()
     {
         using var db = Configuracion.CrearDb();
@@ -193,6 +221,7 @@ public partial class MainWindow : Window
         var antiguos = servicio.TicketsMasAntiguosSinResolver()
             .Select(t => new FilaTicketAntiguoMostrar
             {
+                IdTicket = t.IdTicket,
                 Cliente = t.Cliente,
                 Equipo = t.Equipo,
                 NombreEstado = Textos.Mostrar(t.Estado),
@@ -227,6 +256,28 @@ public partial class MainWindow : Window
             AlturaBarra = Math.Max((double)m.Cantidad / maximoMes * 120, 4)
         }).ToList();
     }
+
+
+    private void TicketAntiguo_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        var borde = (Border)sender;
+        var idTicket = (int)borde.Tag;
+
+        var ventana = new VerTicketWindow(idTicket) { Owner = this };
+        ventana.ShowDialog();
+    }
+
+
+    private void BarraCliente_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        var grid = (Grid)sender;
+        var nombreCliente = (string)grid.Tag;
+
+        var vista = new TicketsView();
+        MostrarModulo(vista, BtnTickets);
+        vista.FiltrarPorTexto(nombreCliente);
+    }
+
 
     // ===== Cerrar sesión =====
 

@@ -177,4 +177,10 @@ public partial class TicketsView : UserControl
             AvisoDialog.Mostrar(Window.GetWindow(this), "No se pudo generar el archivo", ex.Message, esError: true);
         }
     }
+
+    // Permite que otra pantalla (como el Inicio) fije el texto del buscador
+    public void FiltrarPorTexto(string texto)
+    {
+        TxtBuscar.Text = texto;
+    }
 }
