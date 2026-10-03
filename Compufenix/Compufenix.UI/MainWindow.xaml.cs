@@ -82,6 +82,12 @@ public partial class MainWindow : Window
         MostrarModulo(new InventarioView(), BtnInventario);
     }
 
+    private void Clientes_Click(object sender, RoutedEventArgs e)
+    {
+        MostrarModulo(new ClientesView(), BtnClientes);
+    }
+
+
     // ===== Resumen del Inicio =====
 
     private void CargarResumen()

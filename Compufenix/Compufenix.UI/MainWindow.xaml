@@ -55,9 +55,8 @@
                             <TextBlock Text="Tickets" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-
-                    <Button x:Name="BtnClientes" Style="{StaticResource BotonMenuOscuro}" IsEnabled="False">
-                        <StackPanel Orientation="Horizontal">
+                    
+                    <Button x:Name="BtnClientes" Click="Clientes_Click" Style="{StaticResource BotonMenuOscuro}">                        <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>
                             <TextBlock Text="Clientes" VerticalAlignment="Center"/>
