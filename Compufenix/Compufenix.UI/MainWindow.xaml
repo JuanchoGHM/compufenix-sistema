@@ -71,7 +71,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="BtnUsuarios" Style="{StaticResource BotonMenuOscuro}" IsEnabled="False">
+                    <Button x:Name="BtnUsuarios" Click="Usuarios_Click" Style="{StaticResource BotonMenuOscuro}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;"
                                        FontSize="16" Width="30" VerticalAlignment="Center"/>

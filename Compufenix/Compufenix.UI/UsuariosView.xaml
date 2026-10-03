@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Compufenix.UI.UsuariosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="40,36,40,36">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <StackPanel>
+                <TextBlock Text="Usuarios" Style="{StaticResource Titulo}" FontSize="28"/>
+                <TextBlock Text="Administradores y técnicos con acceso al sistema."
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,0"/>
+            </StackPanel>
+            <Button Content="+ Nuevo usuario"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Click="NuevoUsuario_Click"/>
+        </Grid>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1" CornerRadius="16" Padding="8,8,20,8">
+            <Border.Effect>
+                <DropShadowEffect Color="#0F172A" BlurRadius="20"
+                                  ShadowDepth="4" Direction="270" Opacity="0.05"/>
+            </Border.Effect>
+            <DataGrid x:Name="TablaUsuarios"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      RowHeight="56"
+                      Background="Transparent"
+                      BorderThickness="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="NOMBRE" Binding="{Binding Nombre}"
+                                         Width="2*" FontWeight="SemiBold"/>
+                    <DataGridTextColumn Header="CORREO" Binding="{Binding Correo}" Width="2*"/>
+                    <DataGridTextColumn Header="ROL" Binding="{Binding Rol}" Width="*"/>
+
+                    <DataGridTemplateColumn Header="ESTADO" Width="110">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Ellipse Width="8" Height="8" Margin="0,0,8,0">
+                                        <Ellipse.Style>
+                                            <Style TargetType="Ellipse">
+                                                <Setter Property="Fill" Value="#22C55E"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Activo}" Value="False">
+                                                        <Setter Property="Fill" Value="#9CA3AF"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Ellipse.Style>
+                                    </Ellipse>
+                                    <TextBlock FontSize="13">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="Activo"/>
+                                                <Setter Property="Foreground" Value="{StaticResource TextoSuaveBrush}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Activo}" Value="False">
+                                                        <Setter Property="Text" Value="Inactivo"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="" Width="140">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource BotonSecundario}"
+                                        Padding="12,6" Click="CambiarActivo_Click">
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="Desactivar"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Activo}" Value="False">
+                                                        <Setter Property="Text" Value="Activar"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -63,4 +63,22 @@ public class ServicioUsuarios
 
         return BCrypt.Net.BCrypt.Verify(contrasena, usuario.ContrasenaHash) ? usuario : null;
     }
+
+
+    // Lista de todos los usuarios, el más reciente primero
+    public List<Usuario> ObtenerTodos()
+    {
+        return _db.Usuarios.OrderByDescending(u => u.IdUsuario).ToList();
+    }
+
+    // Activa o desactiva a un usuario (no se elimina, para conservar el historial)
+    public void CambiarActivo(int idUsuario, bool activo)
+    {
+        var usuario = _db.Usuarios.Find(idUsuario)
+            ?? throw new InvalidOperationException("El usuario ya no existe.");
+
+        usuario.Activo = activo;
+        _db.SaveChanges();
+    }
+
 }
