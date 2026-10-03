@@ -11,10 +11,19 @@ public partial class TicketsView : UserControl
 
     private readonly bool _soloAbiertos;
 
+    private bool _cargandoFiltros = true;
+
     public TicketsView(bool soloAbiertos = false)
     {
         InitializeComponent();
         _soloAbiertos = soloAbiertos;
+
+        var opciones = new List<string> { "Todos los estados" };
+        opciones.AddRange(Enum.GetValues<EstadoTicket>().Select(Textos.Mostrar));
+        CmbFiltroEstado.ItemsSource = opciones;
+        CmbFiltroEstado.SelectedIndex = 0;
+        _cargandoFiltros = false;
+
         CargarTickets();
     }
     private void CargarTickets(string? texto = null)
@@ -28,6 +37,12 @@ public partial class TicketsView : UserControl
                 tickets = tickets.Where(t => t.Estado != EstadoTicket.Entregado
                                           && t.Estado != EstadoTicket.Cancelado).ToList();
 
+            if (CmbFiltroEstado.SelectedIndex > 0)
+            {
+                var estadoElegido = Enum.GetValues<EstadoTicket>()[CmbFiltroEstado.SelectedIndex - 1];
+                tickets = tickets.Where(t => t.Estado == estadoElegido).ToList();
+            }
+
             _ticketsActuales = tickets;
             TablaTickets.ItemsSource = _ticketsActuales;
         }
@@ -35,6 +50,12 @@ public partial class TicketsView : UserControl
         {
             // La tabla se queda vacía si falla
         }
+    }
+
+    private void CmbFiltroEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_cargandoFiltros) return;
+        CargarTickets(TxtBuscar.Text);
     }
 
     private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)

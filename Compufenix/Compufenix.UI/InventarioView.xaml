@@ -49,7 +49,8 @@
                       GridLinesVisibility="Horizontal"
                       RowHeight="56"
                       Background="Transparent"
-                      BorderThickness="0">
+                      BorderThickness="0"
+                      CanUserSortColumns="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="NOMBRE" Binding="{Binding Nombre}"
                                          Width="2*" FontWeight="SemiBold"/>
@@ -60,7 +61,7 @@
                     <DataGridTextColumn Header="STOCK" Binding="{Binding StockActual}" Width="90"/>
                     <DataGridTextColumn Header="MÍNIMO" Binding="{Binding StockMinimo}" Width="90"/>
 
-                    <DataGridTemplateColumn Header="ESTADO" Width="120">
+                    <DataGridTemplateColumn Header="ESTADO" Width="120" SortMemberPath="StockActual">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

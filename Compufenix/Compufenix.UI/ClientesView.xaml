@@ -46,7 +46,8 @@
                       GridLinesVisibility="Horizontal"
                       RowHeight="56"
                       Background="Transparent"
-                      BorderThickness="0">
+                      BorderThickness="0"
+                      CanUserSortColumns="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="NOMBRE" Binding="{Binding Nombre}"
                                          Width="2*" FontWeight="SemiBold"/>

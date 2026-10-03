@@ -37,15 +37,31 @@
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,0,0,16">
-            <TextBox x:Name="TxtBuscar"
-                     Width="320" HorizontalAlignment="Left"
-                     Padding="38,10"
-                     TextChanged="TxtBuscar_TextChanged"/>
-            <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
-                       Foreground="{StaticResource TextoSuaveBrush}"
-                       FontSize="14"
-                       HorizontalAlignment="Left" VerticalAlignment="Center"
-                       Margin="14,0,0,0" IsHitTestVisible="False"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <TextBox x:Name="TxtBuscar"
+                         Padding="38,10"
+                         TextChanged="TxtBuscar_TextChanged"/>
+                <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets"
+                           Foreground="{StaticResource TextoSuaveBrush}"
+                           FontSize="14"
+                           HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Margin="14,0,0,0" IsHitTestVisible="False"/>
+            </Grid>
+
+            <ComboBox x:Name="CmbFiltroEstado" Grid.Column="2"
+                      SelectionChanged="CmbFiltroEstado_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </Grid>
 
         <Border Grid.Row="2"
@@ -64,14 +80,18 @@
                       RowHeight="56"
                       Background="Transparent"
                       BorderThickness="0"
+                      CanUserSortColumns="True"
                       MouseDoubleClick="TablaTickets_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="CLIENTE" Binding="{Binding Equipo.Cliente.Nombre}"
+                                         SortMemberPath="Equipo.Cliente.Nombre"
                                          Width="1.6*" FontWeight="SemiBold"/>
-                    <DataGridTextColumn Header="EQUIPO" Binding="{Binding Equipo.Tipo}" Width="*"/>
-                    <DataGridTextColumn Header="TÉCNICO" Binding="{Binding Tecnico.Nombre}" Width="*"
+                    <DataGridTextColumn Header="EQUIPO" Binding="{Binding Equipo.Tipo}"
+                                         SortMemberPath="Equipo.Tipo" Width="*"/>
+                    <DataGridTextColumn Header="TÉCNICO" Binding="{Binding Tecnico.Nombre}"
+                                         SortMemberPath="Tecnico.Nombre" Width="*"
                                          Foreground="{StaticResource TextoSuaveBrush}"/>
-                    <DataGridTemplateColumn Header="ESTADO" Width="*">
+                    <DataGridTemplateColumn Header="ESTADO" Width="*" SortMemberPath="Estado">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Estado, Converter={StaticResource ConvertidorEstado}}"/>
