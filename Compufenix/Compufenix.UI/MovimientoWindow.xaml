@@ -1,0 +1,95 @@
+﻿<Window x:Class="Compufenix.UI.MovimientoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="COMPUFENIX"
+        Width="520" SizeToContent="Height"
+        Background="{StaticResource FondoBrush}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="{StaticResource SuperficieBrush}"
+                BorderBrush="{StaticResource BordeBrush}"
+                BorderThickness="1"
+                CornerRadius="16"
+                Margin="24"
+                Padding="32">
+            <StackPanel>
+                <Border Width="52" Height="52" CornerRadius="26"
+                        Background="{StaticResource HoverSuaveBrush}"
+                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE81E;"
+                               FontSize="22" Foreground="{StaticResource PrimarioBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="Registrar movimiento" Style="{StaticResource Titulo}"/>
+                <TextBlock x:Name="TxtProducto"
+                           Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
+
+                <TextBlock Text="Tipo de movimiento" Style="{StaticResource Etiqueta}"/>
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="OpEntrada" Grid.Column="0"
+                                 Content="Entrada" GroupName="Tipo"
+                                 IsChecked="True" VerticalAlignment="Center"/>
+                    <RadioButton x:Name="OpSalida" Grid.Column="2"
+                                 Content="Salida" GroupName="Tipo"
+                                 VerticalAlignment="Center"/>
+                </Grid>
+
+                <TextBlock Text="Cantidad" Style="{StaticResource Etiqueta}"/>
+                <TextBox x:Name="TxtCantidad" Margin="0,0,0,12"/>
+
+                <Border x:Name="PanelError" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtError"
+                               Foreground="#DC2626" FontSize="12"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Grid Margin="0,12,0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Cancelar"
+                            Style="{StaticResource BotonSecundario}"
+                            Click="Cancelar_Click"/>
+                    <Button Grid.Column="2" Content="Registrar"
+                            Click="Registrar_Click"/>
+                </Grid>
+
+                <TextBlock Text="Historial reciente" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextoBrush}" Margin="0,0,0,10"/>
+                <ItemsControl x:Name="ListaHistorial">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Ellipse Width="8" Height="8" Margin="0,0,8,0"
+                                             VerticalAlignment="Center"
+                                             Fill="{Binding Color}"/>
+                                    <TextBlock Text="{Binding Descripcion}" FontSize="13"
+                                               Foreground="{StaticResource TextoBrush}"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="{Binding FechaTexto}"
+                                           FontSize="12" Foreground="{StaticResource TextoSuaveBrush}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="TxtSinMovimientos" Text="Todavía no hay movimientos registrados."
+                           Style="{StaticResource Subtitulo}"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>

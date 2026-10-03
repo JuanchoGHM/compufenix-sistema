@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Compufenix.Models;
 
@@ -12,6 +13,6 @@ public class Equipo
     public string? Modelo { get; set; }
     public string? NumeroSerie { get; set; }
 
-    // Acceso directo al dueño del equipo
+    [ForeignKey("IdCliente")]
     public Cliente? Cliente { get; set; }
 }

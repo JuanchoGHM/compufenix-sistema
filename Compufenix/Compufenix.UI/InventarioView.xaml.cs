@@ -41,6 +41,18 @@ public partial class InventarioView : UserControl
         }
     }
 
+    private void Movimiento_Click(object sender, RoutedEventArgs e)
+    {
+        var boton = (Button)sender;
+        var producto = (Producto)boton.DataContext;
+
+        var ventana = new MovimientoWindow(producto) { Owner = Window.GetWindow(this) };
+        if (ventana.ShowDialog() == true)
+        {
+            CargarProductos(TxtBuscar.Text);
+        }
+    }
+
     private void Editar_Click(object sender, RoutedEventArgs e)
     {
         var boton = (Button)sender;
