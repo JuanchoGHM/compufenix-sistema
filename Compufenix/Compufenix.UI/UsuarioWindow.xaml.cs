@@ -7,6 +7,7 @@ namespace Compufenix.UI;
 public partial class UsuarioWindow : Window
 {
     private readonly Usuario? _usuarioExistente;
+    private bool _contrasenaVisible;
 
     // Sin parámetros: usuario nuevo. Con un usuario: modo edición.
     public UsuarioWindow(Usuario? usuario = null)
@@ -51,13 +52,14 @@ public partial class UsuarioWindow : Window
 
             if (_usuarioExistente == null)
             {
-                servicio.CrearUsuario(TxtNombre.Text, TxtCorreo.Text, TxtContrasena.Password, rol);
+                servicio.CrearUsuario(TxtNombre.Text, TxtCorreo.Text, ObtenerContrasena(), rol);
             }
             else
             {
-                string? nuevaContrasena = string.IsNullOrEmpty(TxtContrasena.Password)
+                var contrasenaIngresada = ObtenerContrasena();
+                string? nuevaContrasena = string.IsNullOrEmpty(contrasenaIngresada)
                     ? null
-                    : TxtContrasena.Password;
+                    : contrasenaIngresada;
 
                 servicio.Editar(_usuarioExistente.IdUsuario, TxtNombre.Text, TxtCorreo.Text, rol, nuevaContrasena);
             }
@@ -79,5 +81,26 @@ public partial class UsuarioWindow : Window
     private void Cancelar_Click(object sender, RoutedEventArgs e)
     {
         DialogResult = false;
+    }
+
+    private string ObtenerContrasena() =>
+        _contrasenaVisible ? TxtContrasenaVisible.Text : TxtContrasena.Password;
+
+    private void MostrarContrasena_Click(object sender, RoutedEventArgs e)
+    {
+        _contrasenaVisible = !_contrasenaVisible;
+
+        if (_contrasenaVisible)
+        {
+            TxtContrasenaVisible.Text = TxtContrasena.Password;
+            TxtContrasena.Visibility = Visibility.Collapsed;
+            TxtContrasenaVisible.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            TxtContrasena.Password = TxtContrasenaVisible.Text;
+            TxtContrasenaVisible.Visibility = Visibility.Collapsed;
+            TxtContrasena.Visibility = Visibility.Visible;
+        }
     }
 }

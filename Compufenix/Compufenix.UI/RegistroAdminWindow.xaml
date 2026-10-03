@@ -41,13 +41,27 @@
 
                 <TextBlock Text="Contraseña (mínimo 6 caracteres)" FontSize="12" FontWeight="Medium"
                            Foreground="#0F172A" Margin="0,0,0,6"/>
-                <PasswordBox x:Name="TxtContrasena" Foreground="#0F172A" BorderBrush="#E2E8F0"
-                             Margin="0,0,0,16"/>
+                <Grid Margin="0,0,0,16">
+                    <PasswordBox x:Name="TxtContrasena" Foreground="#0F172A" BorderBrush="#E2E8F0"/>
+                    <TextBox x:Name="TxtContrasenaVisible" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                             Visibility="Collapsed"/>
+                    <Button Content="&#xE7B3;" Style="{StaticResource BotonIcono}"
+                            Width="28" Height="28" Foreground="#64748B"
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Margin="0,0,4,0" Click="MostrarContrasena_Click"/>
+                </Grid>
 
                 <TextBlock Text="Repetir contraseña" FontSize="12" FontWeight="Medium"
                            Foreground="#0F172A" Margin="0,0,0,6"/>
-                <PasswordBox x:Name="TxtContrasena2" Foreground="#0F172A" BorderBrush="#E2E8F0"
-                             Margin="0,0,0,24"/>
+                <Grid Margin="0,0,0,24">
+                    <PasswordBox x:Name="TxtContrasena2" Foreground="#0F172A" BorderBrush="#E2E8F0"/>
+                    <TextBox x:Name="TxtContrasena2Visible" Foreground="#0F172A" BorderBrush="#E2E8F0"
+                             Visibility="Collapsed"/>
+                    <Button Content="&#xE7B3;" Style="{StaticResource BotonIcono}"
+                            Width="28" Height="28" Foreground="#64748B"
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Margin="0,0,4,0" Click="MostrarContrasena2_Click"/>
+                </Grid>
 
                 <Button Content="Crear administrador" Click="Crear_Click"/>
             </StackPanel>
