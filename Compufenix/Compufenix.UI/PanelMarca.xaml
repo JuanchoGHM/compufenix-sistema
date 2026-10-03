@@ -7,8 +7,8 @@
             <Ellipse Width="420" Height="420" Fill="White" Opacity="0.05"
                      HorizontalAlignment="Right" VerticalAlignment="Top"
                      Margin="0,-140,-140,0"/>
-            <Ellipse Width="300" Height="300" Fill="{StaticResource GradViolet}"
-                     Opacity="0.35"
+            <Ellipse Width="300" Height="300" Fill="{StaticResource GradTeal}"
+                     Opacity="0.25"
                      HorizontalAlignment="Left" VerticalAlignment="Bottom"
                      Margin="-100,0,0,-100"/>
 
@@ -21,20 +21,29 @@
 
                 <!-- Logo -->
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Border Width="40" Height="40" CornerRadius="12"
-                            Background="{StaticResource GradViolet}">
-                        <TextBlock Text="C" Foreground="White"
-                                   FontSize="20" FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                    <Border Width="52" Height="52" CornerRadius="14">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Assets/logo.jpg" Stretch="UniformToFill"/>
+                        </Border.Background>
                     </Border>
-                    <TextBlock Text="COMPUFENIX" Foreground="White"
-                               FontSize="18" FontWeight="Bold"
-                               VerticalAlignment="Center" Margin="14,0,0,0"/>
+                
                 </StackPanel>
 
                 <!-- Mensaje central -->
                 <StackPanel Grid.Row="1" VerticalAlignment="Center">
+
+                    <!-- Logo grande, centrado -->
+                    <Border Width="140" Height="140" CornerRadius="24"
+                            HorizontalAlignment="Left" Margin="0,0,0,28">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="30"
+                                              ShadowDepth="10" Opacity="0.35"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Assets/logo.png" Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
+
                     <TextBlock Foreground="White" FontSize="40"
                                FontWeight="Bold" LineHeight="50">
                         <Run Text="Tu taller,"/>
@@ -42,7 +51,7 @@
                         <Run Text="siempre bajo control."/>
                     </TextBlock>
                     <TextBlock Text="Inventario, reparaciones y clientes en un solo lugar."
-                               Foreground="#C7D2FE" FontSize="16"
+                               Foreground="#BFDBFE" FontSize="16"
                                TextWrapping="Wrap" MaxWidth="420"
                                HorizontalAlignment="Left" Margin="0,16,0,36"/>
 
@@ -80,7 +89,7 @@
                 <!-- Pie -->
                 <TextBlock Grid.Row="2"
                            Text="Sistema de Gestión de Inventario y Tickets de Servicio"
-                           Foreground="#A5B4FC" FontSize="12"/>
+                           Foreground="#93C5FD" FontSize="12"/>
             </Grid>
         </Grid>
     </Border>
