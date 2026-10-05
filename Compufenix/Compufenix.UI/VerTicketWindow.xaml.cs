@@ -64,6 +64,8 @@ public partial class VerTicketWindow : Window
         ListaRepuestos.ItemsSource = filas;
         TxtSinRepuestos.Visibility = filas.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
 
+        TxtCostoRepuestos.Text = (ticket.CostoTotal - ticket.CostoManoObra).ToString("C");
+        TxtCostoManoObra.Text = ticket.CostoManoObra.ToString("C");
         TxtCostoTotal.Text = ticket.CostoTotal.ToString("C");
     }
 

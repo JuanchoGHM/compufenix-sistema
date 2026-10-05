@@ -50,6 +50,38 @@ public class ServicioClientes
         _db.SaveChanges();
     }
 
+    // Crea un cliente nuevo junto con su primer equipo, todo en un solo guardado:
+    // si algo falla, no queda un cliente a medias.
+    public Equipo GuardarConEquipo(Cliente cliente, Equipo equipo)
+    {
+        if (string.IsNullOrWhiteSpace(cliente.Nombre))
+            throw new ArgumentException("El nombre del cliente es obligatorio.");
+
+        if (string.IsNullOrWhiteSpace(equipo.Tipo))
+            throw new ArgumentException("El tipo de equipo es obligatorio (por ejemplo: Laptop, Impresora).");
+
+        static string? Limpiar(string? s) => string.IsNullOrWhiteSpace(s) ? null : s.Trim();
+
+        cliente.IdCliente = 0;
+        cliente.Nombre = cliente.Nombre.Trim();
+        cliente.Telefono = Limpiar(cliente.Telefono);
+        cliente.Correo = Limpiar(cliente.Correo);
+        cliente.Direccion = Limpiar(cliente.Direccion);
+
+        equipo.IdEquipo = 0;
+        equipo.Tipo = equipo.Tipo.Trim();
+        equipo.Marca = Limpiar(equipo.Marca);
+        equipo.Modelo = Limpiar(equipo.Modelo);
+        equipo.NumeroSerie = Limpiar(equipo.NumeroSerie);
+        equipo.Cliente = cliente; // EF asigna el IdCliente al guardar
+
+        _db.Clientes.Add(cliente);
+        _db.Equipos.Add(equipo);
+        _db.SaveChanges();
+
+        return equipo;
+    }
+
     public void Eliminar(int idCliente)
     {
         var cliente = _db.Clientes.Find(idCliente);

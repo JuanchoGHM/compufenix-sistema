@@ -53,6 +53,25 @@ public class ServicioEquipos
         _db.SaveChanges();
     }
 
+    // Cambia los datos de un equipo ya registrado (el cliente dueño no cambia)
+    public void Actualizar(int idEquipo, string tipo, string? marca, string? modelo, string? numeroSerie)
+    {
+        if (string.IsNullOrWhiteSpace(tipo))
+            throw new ArgumentException("El tipo de equipo es obligatorio (por ejemplo: Laptop, Impresora).");
+
+        var equipo = _db.Equipos.Find(idEquipo)
+            ?? throw new InvalidOperationException("El equipo ya no existe.");
+
+        static string? Limpiar(string? s) => string.IsNullOrWhiteSpace(s) ? null : s.Trim();
+
+        equipo.Tipo = tipo.Trim();
+        equipo.Marca = Limpiar(marca);
+        equipo.Modelo = Limpiar(modelo);
+        equipo.NumeroSerie = Limpiar(numeroSerie);
+
+        _db.SaveChanges();
+    }
+
     public void Eliminar(int idEquipo)
     {
         var equipo = _db.Equipos.Find(idEquipo);

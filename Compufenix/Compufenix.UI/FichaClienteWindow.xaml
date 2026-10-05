@@ -27,7 +27,7 @@
                            Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
 
                 <!-- Formulario para agregar un equipo -->
-                <TextBlock Text="Agregar equipo" FontWeight="SemiBold"
+                <TextBlock x:Name="TxtTituloFormulario" Text="Agregar equipo" FontWeight="SemiBold"
                            Foreground="{DynamicResource TextoBrush}" Margin="0,0,0,12"/>
 
                 <Grid Margin="0,0,0,12">
@@ -69,8 +69,13 @@
                                TextWrapping="Wrap"/>
                 </Border>
 
-                <Button Content="+ Agregar equipo" HorizontalAlignment="Left"
-                        Click="AgregarEquipo_Click" Margin="0,0,0,28"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
+                    <Button x:Name="BtnGuardarEquipo" Content="+ Agregar equipo"
+                            Click="AgregarEquipo_Click"/>
+                    <Button x:Name="BtnCancelarEdicion" Content="Cancelar edición"
+                            Style="{StaticResource BotonSecundario}" Margin="8,0,0,0"
+                            Visibility="Collapsed" Click="CancelarEdicion_Click"/>
+                </StackPanel>
 
                 <!-- Lista de equipos -->
                 <TextBlock Text="Equipos registrados" FontWeight="SemiBold"
@@ -92,12 +97,20 @@
                                         <TextBlock Text="{Binding Detalle}" FontSize="12"
                                                    Foreground="{DynamicResource TextoSuaveBrush}"/>
                                     </StackPanel>
-                                    <Button Grid.Column="1" Content="&#xE74D;"
-                                            Style="{StaticResource BotonIcono}"
-                                            Width="28" Height="28" Foreground="#DC2626"
-                                            Tag="{Binding IdEquipo}"
-                                            ToolTip="Eliminar equipo"
-                                            Click="EliminarEquipo_Click"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+                                        <Button Content="&#xE70F;"
+                                                Style="{StaticResource BotonIcono}"
+                                                Width="28" Height="28"
+                                                ToolTip="Editar equipo"
+                                                Click="EditarEquipo_Click"/>
+                                        <Button Content="&#xE74D;"
+                                                Style="{StaticResource BotonIcono}"
+                                                Width="28" Height="28" Margin="2,0,0,0" Foreground="#DC2626"
+                                                Tag="{Binding IdEquipo}"
+                                                ToolTip="Eliminar equipo"
+                                                Click="EliminarEquipo_Click"/>
+                                    </StackPanel>
                                 </Grid>
                             </Border>
                         </DataTemplate>

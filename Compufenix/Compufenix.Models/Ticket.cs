@@ -12,6 +12,9 @@ public class Ticket
     public DateTime FechaIngreso { get; set; } = DateTime.Now;
     public EstadoTicket Estado { get; set; } = EstadoTicket.Recibido;
     public string? Diagnostico { get; set; }
+    // Lo que cobra el técnico por su trabajo; se escribe a mano.
+    public decimal CostoManoObra { get; set; }
+    // Total del ticket = repuestos + mano de obra
     public decimal CostoTotal { get; set; }
 
     [ForeignKey("IdEquipo")]

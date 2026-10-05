@@ -141,11 +141,24 @@
             <!-- ===== Costo total ===== -->
             <Border Background="{StaticResource GradTeal}"
                     CornerRadius="16" Padding="24" Margin="0,0,0,20">
-                <Grid>
-                    <TextBlock Text="Costo total" Foreground="White" FontSize="14" Opacity="0.9"/>
-                    <TextBlock x:Name="TxtCostoTotal" FontSize="24" FontWeight="Bold"
-                               Foreground="White" HorizontalAlignment="Right"/>
-                </Grid>
+                <StackPanel>
+                    <Grid Margin="0,0,0,2">
+                        <TextBlock Text="Repuestos" Foreground="White" FontSize="12" Opacity="0.8"/>
+                        <TextBlock x:Name="TxtCostoRepuestos" Foreground="White" FontSize="12"
+                                   Opacity="0.9" HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Grid Margin="0,0,0,10">
+                        <TextBlock Text="Mano de obra" Foreground="White" FontSize="12" Opacity="0.8"/>
+                        <TextBlock x:Name="TxtCostoManoObra" Foreground="White" FontSize="12"
+                                   Opacity="0.9" HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="Costo total" Foreground="White" FontSize="14" Opacity="0.9"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtCostoTotal" FontSize="24" FontWeight="Bold"
+                                   Foreground="White" HorizontalAlignment="Right"/>
+                    </Grid>
+                </StackPanel>
             </Border>
 
             <Button Content="Cerrar" Style="{StaticResource BotonSecundario}"

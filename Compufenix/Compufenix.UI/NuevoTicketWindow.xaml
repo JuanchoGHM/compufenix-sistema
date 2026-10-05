@@ -6,7 +6,7 @@
         Background="{DynamicResource FondoBrush}"
         WindowStartupLocation="Manual"
         ResizeMode="NoResize">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="700">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Border Background="{DynamicResource SuperficieBrush}"
                 BorderBrush="{DynamicResource BordeBrush}"
                 BorderThickness="1"
@@ -25,15 +25,26 @@
                 <TextBlock Text="Nuevo ticket de servicio" Style="{StaticResource Titulo}"/>
                 <TextBlock Text="Selecciona el equipo y describe el motivo de la visita."
                            Style="{StaticResource Subtitulo}" Margin="0,6,0,24"/>
-            
+
                 <TextBlock Text="Equipo" Style="{StaticResource Etiqueta}"/>
-                <ComboBox x:Name="CmbEquipo" Margin="0,0,0,16">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Descripcion}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="CmbEquipo" Grid.Column="0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Descripcion}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Grid.Column="2" Content="+ Nuevo cliente"
+                            Style="{StaticResource BotonSecundario}"
+                            ToolTip="Registrar un cliente nuevo con su equipo"
+                            Click="NuevoCliente_Click"/>
+                </Grid>
 
                 <TextBlock Text="Técnico asignado (opcional)" Style="{StaticResource Etiqueta}"/>
                 <ComboBox x:Name="CmbTecnico" Margin="0,0,0,16">

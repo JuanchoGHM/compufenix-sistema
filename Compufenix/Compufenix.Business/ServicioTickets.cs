@@ -113,6 +113,92 @@ public class ServicioTickets
         _db.SaveChanges();
     }
 
+    // Guarda el costo de mano de obra (escrito a mano) y ajusta el costo total del ticket
+    public void GuardarManoDeObra(int idTicket, decimal monto)
+    {
+        if (monto < 0)
+            throw new ArgumentException("La mano de obra no puede ser negativa.");
+
+        if (monto > 99_999_999m)
+            throw new ArgumentException("El monto de mano de obra es demasiado grande.");
+
+        var ticket = _db.Tickets.Find(idTicket)
+            ?? throw new InvalidOperationException("El ticket ya no existe.");
+
+        monto = Math.Round(monto, 2);
+
+        // El total = repuestos + mano de obra, así que solo se suma la diferencia
+        ticket.CostoTotal += monto - ticket.CostoManoObra;
+        ticket.CostoManoObra = monto;
+
+        _db.SaveChanges();
+    }
+
+    // Edita un repuesto ya usado en un ticket (producto y/o cantidad).
+    // Devuelve al stock lo que se había descontado, descuenta lo nuevo y ajusta el costo del ticket.
+    public void EditarRepuesto(int idMovimiento, int idProducto, int cantidad)
+    {
+        if (cantidad <= 0)
+            throw new ArgumentException("La cantidad debe ser mayor a cero.");
+
+        var mov = _db.MovimientosInventario.Find(idMovimiento)
+            ?? throw new InvalidOperationException("El repuesto ya no existe.");
+
+        if (mov.IdTicket == null || mov.Tipo != TipoMovimiento.Salida)
+            throw new InvalidOperationException("Este movimiento no es un repuesto de ticket.");
+
+        var ticket = _db.Tickets.Find(mov.IdTicket.Value)
+            ?? throw new InvalidOperationException("El ticket ya no existe.");
+
+        var productoAnterior = _db.Productos.Find(mov.IdProducto)
+            ?? throw new InvalidOperationException("El producto anterior ya no existe.");
+
+        var productoNuevo = _db.Productos.Find(idProducto)
+            ?? throw new InvalidOperationException("El producto ya no existe.");
+
+        // 1. Deshace el uso anterior
+        productoAnterior.StockActual += mov.Cantidad;
+        ticket.CostoTotal -= productoAnterior.PrecioUnitario * mov.Cantidad;
+
+        // 2. Valida y aplica el uso nuevo (si es el mismo producto, ya tiene el stock devuelto)
+        if (cantidad > productoNuevo.StockActual)
+            throw new InvalidOperationException(
+                $"No hay suficiente stock de \"{productoNuevo.Nombre}\". Disponible: {productoNuevo.StockActual}.");
+
+        productoNuevo.StockActual -= cantidad;
+        ticket.CostoTotal += productoNuevo.PrecioUnitario * cantidad;
+        if (ticket.CostoTotal < ticket.CostoManoObra) ticket.CostoTotal = ticket.CostoManoObra;
+
+        mov.IdProducto = idProducto;
+        mov.Cantidad = cantidad;
+
+        // Todo se guarda junto, o no se guarda nada
+        _db.SaveChanges();
+    }
+
+    // Quita un repuesto de un ticket: devuelve el stock y resta su costo
+    public void EliminarRepuesto(int idMovimiento)
+    {
+        var mov = _db.MovimientosInventario.Find(idMovimiento);
+        if (mov == null) return;
+
+        if (mov.IdTicket == null || mov.Tipo != TipoMovimiento.Salida)
+            throw new InvalidOperationException("Este movimiento no es un repuesto de ticket.");
+
+        var ticket = _db.Tickets.Find(mov.IdTicket.Value)
+            ?? throw new InvalidOperationException("El ticket ya no existe.");
+
+        var producto = _db.Productos.Find(mov.IdProducto)
+            ?? throw new InvalidOperationException("El producto ya no existe.");
+
+        producto.StockActual += mov.Cantidad;
+        ticket.CostoTotal -= producto.PrecioUnitario * mov.Cantidad;
+        if (ticket.CostoTotal < ticket.CostoManoObra) ticket.CostoTotal = ticket.CostoManoObra;
+
+        _db.MovimientosInventario.Remove(mov);
+        _db.SaveChanges();
+    }
+
     // Repuestos usados en un ticket, con el nombre del producto ya cargado
     public List<MovimientoInventario> ObtenerRepuestosUsados(int idTicket)
     {

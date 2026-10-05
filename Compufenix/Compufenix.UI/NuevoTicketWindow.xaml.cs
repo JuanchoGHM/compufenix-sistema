@@ -16,6 +16,7 @@ public partial class NuevoTicketWindow : Window
     public NuevoTicketWindow()
     {
         InitializeComponent();
+        MaxHeight = SystemParameters.WorkArea.Height - 20; // nunca más alta que la pantalla
         FechaIngreso.SelectedDate = DateTime.Now;
         CargarListas();
         this.CentrarEnPantalla();
@@ -37,6 +38,17 @@ public partial class NuevoTicketWindow : Window
             .Where(u => u.Rol == RolUsuario.Tecnico && u.Activo)
             .ToList();
         CmbTecnico.ItemsSource = tecnicos;
+    }
+
+    // Abre el registro rápido de cliente + equipo y deja el equipo nuevo seleccionado
+    private void NuevoCliente_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = new ClienteRapidoWindow { Owner = this };
+        if (ventana.ShowDialog() != true) return;
+
+        CargarListas();
+        CmbEquipo.SelectedItem = (CmbEquipo.ItemsSource as IEnumerable<OpcionEquipo>)?
+            .FirstOrDefault(o => o.IdEquipo == ventana.IdEquipoCreado);
     }
 
     private void Crear_Click(object sender, RoutedEventArgs e)

@@ -26,7 +26,7 @@
 
                 <!-- Contenido central: se reduce si no cabe, nunca se agranda -->
                 <Viewbox Grid.Row="0" Stretch="Uniform" StretchDirection="DownOnly"
-                         HorizontalAlignment="Left" VerticalAlignment="Center">
+                         HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel Width="440" Margin="16">
 
                         <Border Width="140" Height="140" CornerRadius="24"
@@ -54,34 +54,36 @@
                                    TextWrapping="Wrap"
                                    HorizontalAlignment="Left" Margin="0,16,0,36"/>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                            <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE719;"
-                                           Foreground="White" FontSize="16"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Inventario en tiempo real" Foreground="White"
-                                       FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
-                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE719;"
+                                               Foreground="White" FontSize="16"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Inventario en tiempo real" Foreground="White"
+                                           FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                            <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
-                                           Foreground="White" FontSize="16"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Tickets de servicio técnico" Foreground="White"
-                                       FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE90F;"
+                                               Foreground="White" FontSize="16"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Tickets de servicio técnico" Foreground="White"
+                                           FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                            </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
-                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
-                                           Foreground="White" FontSize="16"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <TextBlock Text="Historial completo por cliente" Foreground="White"
-                                       FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="38" Height="38" CornerRadius="10" Background="#26FFFFFF">
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
+                                               Foreground="White" FontSize="16"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Historial completo por cliente" Foreground="White"
+                                           FontSize="15" VerticalAlignment="Center" Margin="14,0,0,0"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </Viewbox>
