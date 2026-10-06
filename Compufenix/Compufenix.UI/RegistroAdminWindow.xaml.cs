@@ -33,7 +33,8 @@ public partial class RegistroAdminWindow : Window
 
         if (contrasena != contrasena2)
         {
-            MessageBox.Show("Las contraseñas no coinciden.");
+            AvisoDialog.Mostrar(this, "Las contraseñas no coinciden",
+                "Escribe la misma contraseña en los dos campos.", esError: true);
             return;
         }
 
@@ -48,12 +49,13 @@ public partial class RegistroAdminWindow : Window
                 contrasena,
                 RolUsuario.Administrador);
 
-            MessageBox.Show("Administrador creado correctamente.");
+            AvisoDialog.Mostrar(this, "Administrador creado",
+                "Administrador creado correctamente.");
             DialogResult = true;
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            AvisoDialog.Mostrar(this, "No se pudo crear el administrador", ex.Message, esError: true);
         }
     }
 

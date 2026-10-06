@@ -19,9 +19,12 @@ public partial class VerTicketWindow : Window
         public Visibility LineaVisible { get; set; }
     }
 
+    private readonly int _idTicket;
+
     public VerTicketWindow(int idTicket)
     {
         InitializeComponent();
+        _idTicket = idTicket;
         this.CentrarEnPantalla();
 
         using var db = Configuracion.CrearDb();
@@ -83,6 +86,38 @@ public partial class VerTicketWindow : Window
 
         PildoraEstado.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(fondo));
         TxtEstado.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(texto));
+    }
+
+    private void ExportarPdf_Click(object sender, RoutedEventArgs e)
+    {
+        Exportar("PDF (*.pdf)|*.pdf", ".pdf", "PDF", ExportadorTicket.ExportarPdf);
+    }
+
+    private void ExportarExcel_Click(object sender, RoutedEventArgs e)
+    {
+        Exportar("Excel (*.xlsx)|*.xlsx", ".xlsx", "Excel", ExportadorTicket.ExportarExcel);
+    }
+
+    // Pide dónde guardar, genera el archivo y avisa el resultado
+    private void Exportar(string filtro, string extension, string nombreFormato, Action<int, string> generar)
+    {
+        var dialogo = new Microsoft.Win32.SaveFileDialog
+        {
+            Filter = filtro,
+            FileName = $"Ticket_{_idTicket}_{DateTime.Now:yyyyMMdd}{extension}"
+        };
+
+        if (dialogo.ShowDialog() != true) return;
+
+        try
+        {
+            generar(_idTicket, dialogo.FileName);
+            AvisoDialog.Mostrar(this, $"{nombreFormato} generado", "El archivo se generó correctamente.");
+        }
+        catch (Exception ex)
+        {
+            AvisoDialog.Mostrar(this, "No se pudo generar el archivo", ex.Message, esError: true);
+        }
     }
 
     private void Cerrar_Click(object sender, RoutedEventArgs e)

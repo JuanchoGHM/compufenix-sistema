@@ -147,7 +147,7 @@ public partial class FichaClienteWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            AvisoDialog.Mostrar(this, "No se pudo eliminar el equipo", ex.Message, esError: true);
         }
     }
 

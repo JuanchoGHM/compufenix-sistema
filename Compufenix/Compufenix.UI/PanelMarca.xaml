@@ -92,7 +92,8 @@
                 <TextBlock Grid.Row="1"
                            Text="Sistema de Gestión de Inventario y Tickets de Servicio"
                            Foreground="#93C5FD" FontSize="12"
-                           TextWrapping="Wrap" Margin="16,12,16,0"/>
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           HorizontalAlignment="Center" Margin="16,12,16,0"/>
             </Grid>
         </Grid>
     </Border>

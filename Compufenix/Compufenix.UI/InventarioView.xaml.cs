@@ -122,7 +122,7 @@ public partial class InventarioView : UserControl
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            AvisoDialog.Mostrar(Window.GetWindow(this), "No se pudo eliminar el producto", ex.Message, esError: true);
         }
     }
 }

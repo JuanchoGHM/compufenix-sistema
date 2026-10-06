@@ -161,8 +161,15 @@
                 </StackPanel>
             </Border>
 
-            <Button Content="Cerrar" Style="{StaticResource BotonSecundario}"
-                    HorizontalAlignment="Right" Click="Cerrar_Click"/>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="Exportar PDF" Click="ExportarPdf_Click"/>
+                    <Button Content="Exportar Excel" Style="{StaticResource BotonSecundario}"
+                            Margin="8,0,0,0" Click="ExportarExcel_Click"/>
+                </StackPanel>
+                <Button Content="Cerrar" Style="{StaticResource BotonSecundario}"
+                        HorizontalAlignment="Right" Click="Cerrar_Click"/>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </Window>
